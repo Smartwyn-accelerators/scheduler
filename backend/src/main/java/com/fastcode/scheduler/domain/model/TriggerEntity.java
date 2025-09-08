@@ -1,6 +1,6 @@
 package com.fastcode.scheduler.domain.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;

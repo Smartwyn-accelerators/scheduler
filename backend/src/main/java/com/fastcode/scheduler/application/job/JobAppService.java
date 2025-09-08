@@ -1,6 +1,7 @@
 package com.fastcode.scheduler.application.job;
 
 import java.io.IOException;
+import java.lang.reflect.Modifier;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -302,12 +303,11 @@ public class JobAppService implements IJobAppService {
 		URI uri = getClass().getResource("/").toURI();
 
 		if (uri.getScheme().equals("jar")) {
-			List<String> jobClasses = getFilesFromJar("/"+packageName.replace(".", "/")); 
-			return jobClasses;
-		} 
-		else {
+			List<String> jobClasses = getFilesFromJar("/" + packageName.replace(".", "/"));
+			return filterJobImplementations(jobClasses);
+		} else {
 			CGenClassLoader loader = new CGenClassLoader(uri.getPath().substring(1).replace('\\', '/'));
-			ArrayList<Class<?>> jobClasses=null;
+			ArrayList<Class<?>> jobClasses = null;
 			try {
 				jobClasses = loader.findClasses(packageName);
 			} catch (ClassNotFoundException e) {
@@ -316,9 +316,10 @@ public class JobAppService implements IJobAppService {
 
 			List<String> classNameList = new ArrayList<String>();
 
-			for(Class<?> classObj : jobClasses)
-			{
-				classNameList.add(classObj.getName());
+			for (Class<?> classObj : jobClasses) {
+				if (Job.class.isAssignableFrom(classObj) && !classObj.isInterface() && !Modifier.isAbstract(classObj.getModifiers())) {
+					classNameList.add(classObj.getName());
+				}
 			}
 
 			return classNameList;
@@ -328,41 +329,53 @@ public class JobAppService implements IJobAppService {
 	public List<String> getFilesFromJar(String path) {
 
 		CodeSource src = this.getClass().getProtectionDomain().getCodeSource();
-		List<String> list = new ArrayList<String>();
-		if( src != null ) {
+		List<String> list = new ArrayList<>();
+		if (src != null) {
 			java.net.URL jar = src.getLocation();
-			ZipInputStream zip =null;
+			ZipInputStream zip = null;
 			try {
 				zip = new ZipInputStream(jar.openStream());
 				ZipEntry ze = null;
 
-				while( ( ze = zip.getNextEntry() ) != null ) {
+				while ((ze = zip.getNextEntry()) != null) {
 					String entryName = ze.getName();
 
-					if(entryName.startsWith("BOOT-INF/classes" +path + "/") || entryName.startsWith("WEB-INF/classes" + path + "/")) {
-						entryName = entryName.replace( "WEB-INF/classes/", "");
-						if(entryName.contains(".class")) {
+					if (entryName.startsWith("BOOT-INF/classes" + path + "/") || entryName.startsWith("WEB-INF/classes" + path + "/")) {
+						entryName = entryName.replace("WEB-INF/classes/", "");
+						if (entryName.contains(".class")) {
 							list.add(entryName.replace(".class", "").replace("/", "."));
 						}
-
 					}
 				}
 			} catch (IOException e) {
-				logHelper.getLogger().error(String.format("IO Exception Occured while reading files %s", e.getMessage()));
-			} finally
-			{
+				logHelper.getLogger().error(String.format("IO Exception occurred while reading files %s", e.getMessage()));
+			} finally {
 				try {
-					zip.close();
+					if (zip != null) zip.close();
 				} catch (IOException e) {
-					logHelper.getLogger().error(String.format("IO Exception Occured while closing stream %s", e.getMessage()));
+					logHelper.getLogger().error(String.format("IO Exception occurred while closing stream %s", e.getMessage()));
 					e.printStackTrace();
 				}
 			}
-
 		}
 		return list;
 	}
-	
+
+	private List<String> filterJobImplementations(List<String> classNames) {
+		List<String> filteredClasses = new ArrayList<>();
+		for (String className : classNames) {
+			try {
+				Class<?> clazz = Class.forName(className);
+				if (Job.class.isAssignableFrom(clazz) && !clazz.isInterface() && !Modifier.isAbstract(clazz.getModifiers())) {
+					filteredClasses.add(className);
+				}
+			} catch (ClassNotFoundException e) {
+				logHelper.getLogger().error(String.format("Class not found: %s", className));
+			}
+		}
+		return filteredClasses;
+	}
+
 	//List All Job Groups
 	public List<String> listAllJobGroups() throws SchedulerException {
 

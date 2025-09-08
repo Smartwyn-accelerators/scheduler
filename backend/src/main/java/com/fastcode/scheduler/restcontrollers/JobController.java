@@ -18,8 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 
-import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
+import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 import java.net.URISyntaxException;
