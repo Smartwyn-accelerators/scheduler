@@ -1,0 +1,39 @@
+<div class="confirm-dialog-container">
+  <!-- Dialog Header -->
+  <div mat-dialog-title class="dialog-header">
+    <h2 class="dialog-title">{{ title() }}</h2>
+    <button 
+      mat-icon-button 
+      color="warn" 
+      (click)="onCancel()"
+      class="close-button"
+      aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Dialog Content -->
+  <div mat-dialog-content class="dialog-content">
+    <div class="message-container">
+      <mat-icon class="warning-icon">warning</mat-icon>
+      <div class="message-text" [innerHTML]="confirmMessage()"></div>
+    </div>
+  </div>
+
+  <!-- Dialog Actions -->
+  <div mat-dialog-actions class="dialog-actions">
+    <button 
+      mat-button 
+      (click)="onCancel()"
+      class="cancel-button">
+      {{ 'GENERAL.ACTIONS.CANCEL' | translate }}
+    </button>
+    <button 
+      mat-raised-button 
+      color="warn" 
+      (click)="onConfirm()"
+      class="confirm-button">
+      {{ action() }}
+    </button>
+  </div>
+</div>

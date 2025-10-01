@@ -1,0 +1,504 @@
+// Scheduler Theme - CSS Custom Properties and Mixins
+// Angular 20 Material Design 3 compatible
+// This theme provides CSS custom properties and mixins that can be used selectively
+// without disturbing existing component styles
+// Follows the project's azure and blue palette theme
+
+// ============================================================================
+// SCHEDULER THEME SCOPE
+// ============================================================================
+
+// Apply scheduler theme to all scheduler components
+.scheduler-theme {
+  // MDC Theme Token Overrides - Following project's azure and blue palette
+  --mdc-theme-primary: var(--mat-sys-primary);
+  --mdc-theme-on-primary: var(--mat-sys-on-primary);
+  --mdc-theme-primary-container: var(--mat-sys-primary-container);
+  --mdc-theme-on-primary-container: var(--mat-sys-on-primary-container);
+  --mdc-theme-secondary: var(--mat-sys-secondary);
+  --mdc-theme-on-secondary: var(--mat-sys-on-secondary);
+  --mdc-theme-secondary-container: var(--mat-sys-secondary-container);
+  --mdc-theme-on-secondary-container: var(--mat-sys-on-secondary-container);
+  --mdc-theme-tertiary: var(--mat-sys-tertiary);
+  --mdc-theme-on-tertiary: var(--mat-sys-on-tertiary);
+  --mdc-theme-tertiary-container: var(--mat-sys-tertiary-container);
+  --mdc-theme-on-tertiary-container: var(--mat-sys-on-tertiary-container);
+  --mdc-theme-error: var(--mat-sys-error);
+  --mdc-theme-on-error: var(--mat-sys-on-error);
+  --mdc-theme-error-container: var(--mat-sys-error-container);
+  --mdc-theme-on-error-container: var(--mat-sys-on-error-container);
+  --mdc-theme-surface: var(--mat-sys-surface);
+  --mdc-theme-on-surface: var(--mat-sys-on-surface);
+  --mdc-theme-surface-variant: var(--mat-sys-surface-variant);
+  --mdc-theme-on-surface-variant: var(--mat-sys-on-surface-variant);
+  --mdc-theme-outline: var(--mat-sys-outline);
+  --mdc-theme-outline-variant: var(--mat-sys-outline-variant);
+  --mdc-theme-surface-container: var(--mat-sys-surface-container);
+  --mdc-theme-surface-container-low: var(--mat-sys-surface-container-low);
+  --mdc-theme-surface-container-high: var(--mat-sys-surface-container-high);
+  --mdc-theme-surface-container-highest: var(--mat-sys-surface-container-highest);
+
+  // Scheduler-specific color tokens (using project theme as base)
+  --scheduler-primary: var(--mat-sys-primary);
+  --scheduler-on-primary: var(--mat-sys-on-primary);
+  --scheduler-primary-container: var(--mat-sys-primary-container);
+  --scheduler-on-primary-container: var(--mat-sys-on-primary-container);
+  --scheduler-secondary: var(--mat-sys-secondary);
+  --scheduler-on-secondary: var(--mat-sys-on-secondary);
+  --scheduler-secondary-container: var(--mat-sys-secondary-container);
+  --scheduler-on-secondary-container: var(--mat-sys-on-secondary-container);
+  --scheduler-tertiary: var(--mat-sys-tertiary);
+  --scheduler-on-tertiary: var(--mat-sys-on-tertiary);
+  --scheduler-tertiary-container: var(--mat-sys-tertiary-container);
+  --scheduler-on-tertiary-container: var(--mat-sys-on-tertiary-container);
+  --scheduler-error: var(--mat-sys-error);
+  --scheduler-on-error: var(--mat-sys-on-error);
+  --scheduler-error-container: var(--mat-sys-error-container);
+  --scheduler-on-error-container: var(--mat-sys-on-error-container);
+  --scheduler-surface: var(--mat-sys-surface);
+  --scheduler-on-surface: var(--mat-sys-on-surface);
+  --scheduler-surface-variant: var(--mat-sys-surface-variant);
+  --scheduler-on-surface-variant: var(--mat-sys-on-surface-variant);
+  --scheduler-outline: var(--mat-sys-outline);
+  --scheduler-outline-variant: var(--mat-sys-outline-variant);
+  --scheduler-surface-container: var(--mat-sys-surface-container);
+  --scheduler-surface-container-low: var(--mat-sys-surface-container-low);
+  --scheduler-surface-container-high: var(--mat-sys-surface-container-high);
+  --scheduler-surface-container-highest: var(--mat-sys-surface-container-highest);
+
+  // Scheduler-specific spacing and sizing
+  --scheduler-container-padding: 24px;
+  --scheduler-container-padding-mobile: 16px;
+  --scheduler-card-padding: 24px;
+  --scheduler-card-padding-mobile: 16px;
+  --scheduler-form-spacing: 16px;
+  --scheduler-form-spacing-mobile: 12px;
+  --scheduler-border-radius: 28px;
+  --scheduler-border-radius-small: 12px;
+  --scheduler-border-radius-tiny: 8px;
+  --scheduler-elevation-level0: 0 0 0 rgba(0,0,0,0);
+  --scheduler-elevation-level1: 0 1px 2px rgba(0,0,0,0.08);
+  --scheduler-elevation-level2: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  
+  // Typography
+  --scheduler-font-size-title: 32px;
+  --scheduler-font-size-title-mobile: 24px;
+  --scheduler-font-size-subtitle: 16px;
+  --scheduler-font-size-card-title: 24px;
+  --scheduler-font-size-card-title-mobile: 20px;
+  --scheduler-font-size-body: 14px;
+  --scheduler-font-size-small: 12px;
+  --scheduler-font-weight-normal: 400;
+  --scheduler-font-weight-medium: 500;
+  --scheduler-font-weight-semibold: 600;
+  
+  // Form elements
+  --scheduler-input-height: 32px;
+  --scheduler-input-height-small: 28px;
+  --scheduler-input-background: #f5f5f5;
+  --scheduler-input-border-radius: 4px;
+  
+  // Transitions
+  --scheduler-transition-fast: 0.2s ease;
+  --scheduler-transition-normal: 0.3s ease;
+}
+
+// ============================================================================
+// SCSS MIXINS (FOR SELECTIVE USE)
+// ============================================================================
+
+// Apply scheduler theme to component
+@mixin apply-scheduler-theme {
+  // Apply the scheduler theme class to the component
+  @extend .scheduler-theme;
+}
+
+// Alternative: Apply theme directly to :host
+@mixin scheduler-theme-host {
+  // MDC Theme Token Overrides - Following project's azure and blue palette
+  --mdc-theme-primary: var(--mat-sys-primary);
+  --mdc-theme-on-primary: var(--mat-sys-on-primary);
+  --mdc-theme-primary-container: var(--mat-sys-primary-container);
+  --mdc-theme-on-primary-container: var(--mat-sys-on-primary-container);
+  --mdc-theme-secondary: var(--mat-sys-secondary);
+  --mdc-theme-on-secondary: var(--mat-sys-on-secondary);
+  --mdc-theme-secondary-container: var(--mat-sys-secondary-container);
+  --mdc-theme-on-secondary-container: var(--mat-sys-on-secondary-container);
+  --mdc-theme-tertiary: var(--mat-sys-tertiary);
+  --mdc-theme-on-tertiary: var(--mat-sys-on-tertiary);
+  --mdc-theme-tertiary-container: var(--mat-sys-tertiary-container);
+  --mdc-theme-on-tertiary-container: var(--mat-sys-on-tertiary-container);
+  --mdc-theme-error: var(--mat-sys-error);
+  --mdc-theme-on-error: var(--mat-sys-on-error);
+  --mdc-theme-error-container: var(--mat-sys-error-container);
+  --mdc-theme-on-error-container: var(--mat-sys-on-error-container);
+  --mdc-theme-surface: var(--mat-sys-surface);
+  --mdc-theme-on-surface: var(--mat-sys-on-surface);
+  --mdc-theme-surface-variant: var(--mat-sys-surface-variant);
+  --mdc-theme-on-surface-variant: var(--mat-sys-on-surface-variant);
+  --mdc-theme-outline: var(--mat-sys-outline);
+  --mdc-theme-outline-variant: var(--mat-sys-outline-variant);
+  --mdc-theme-surface-container: var(--mat-sys-surface-container);
+  --mdc-theme-surface-container-low: var(--mat-sys-surface-container-low);
+  --mdc-theme-surface-container-high: var(--mat-sys-surface-container-high);
+  --mdc-theme-surface-container-highest: var(--mat-sys-surface-container-highest);
+}
+
+// Container mixin
+@mixin scheduler-container {
+  padding: var(--scheduler-container-padding);
+  max-width: 1400px;
+  margin: 0 auto;
+  
+  @media (max-width: 768px) {
+    padding: var(--scheduler-container-padding-mobile);
+  }
+}
+
+// Page header mixin
+@mixin scheduler-page-header {
+  margin-bottom: 32px;
+  
+  @media (max-width: 768px) {
+    margin-bottom: 24px;
+  }
+}
+
+// Page title mixin
+@mixin scheduler-page-title {
+  font-size: var(--scheduler-font-size-title);
+  font-weight: var(--scheduler-font-weight-normal);
+  margin: 0 0 8px 0;
+  color: var(--scheduler-on-surface);
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+  @media (max-width: 768px) {
+    font-size: var(--scheduler-font-size-title-mobile);
+  }
+  
+  mat-icon {
+    font-size: 36px;
+    width: 36px;
+    height: 36px;
+    color: var(--scheduler-primary);
+    
+    @media (max-width: 768px) {
+      font-size: 28px;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+// Page subtitle mixin
+@mixin scheduler-page-subtitle {
+  font-size: var(--scheduler-font-size-subtitle);
+  color: var(--scheduler-on-surface-variant);
+  margin: 0;
+  line-height: 1.5;
+}
+
+// Card mixin
+@mixin scheduler-card {
+  border-radius: var(--scheduler-border-radius);
+  box-shadow: var(--scheduler-elevation-level2);
+  overflow: hidden;
+  
+  mat-card-header {
+    padding: var(--scheduler-card-padding) var(--scheduler-card-padding) 16px var(--scheduler-card-padding);
+    
+    @media (max-width: 768px) {
+      padding: var(--scheduler-card-padding-mobile) var(--scheduler-card-padding-mobile) 16px var(--scheduler-card-padding-mobile);
+    }
+    
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: var(--scheduler-font-size-card-title);
+      font-weight: var(--scheduler-font-weight-normal);
+      color: var(--scheduler-on-surface);
+      
+      @media (max-width: 768px) {
+        font-size: var(--scheduler-font-size-card-title-mobile);
+      }
+      
+      mat-icon {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+        color: var(--scheduler-primary);
+      }
+    }
+    
+    mat-card-subtitle {
+      font-size: var(--scheduler-font-size-body);
+      color: var(--scheduler-on-surface-variant);
+      margin-top: 4px;
+    }
+  }
+  
+  mat-card-content {
+    padding: 0 var(--scheduler-card-padding) var(--scheduler-card-padding) var(--scheduler-card-padding);
+    
+    @media (max-width: 768px) {
+      padding: 0 var(--scheduler-card-padding-mobile) var(--scheduler-card-padding-mobile) var(--scheduler-card-padding-mobile);
+    }
+  }
+  
+  mat-card-actions {
+    padding: 16px var(--scheduler-card-padding) var(--scheduler-card-padding) var(--scheduler-card-padding);
+    gap: 12px;
+    
+    @media (max-width: 768px) {
+      padding: 12px var(--scheduler-card-padding-mobile) var(--scheduler-card-padding-mobile) var(--scheduler-card-padding-mobile);
+      flex-direction: column;
+      align-items: stretch;
+    }
+    
+    button {
+      border-radius: 20px;
+      text-transform: none;
+      font-weight: var(--scheduler-font-weight-medium);
+      
+      @media (max-width: 768px) {
+        width: 100%;
+        margin: 0;
+      }
+      
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Table section mixin
+@mixin scheduler-table-section {
+  position: relative;
+  padding: 16px;
+  background: var(--scheduler-surface);
+  border-radius: 16px;
+  box-shadow: var(--scheduler-elevation-level1);
+}
+
+// Table container mixin
+@mixin scheduler-table-container {
+  overflow-x: auto;
+  border-radius: var(--scheduler-border-radius-small);
+  background: var(--scheduler-surface);
+  box-shadow: var(--scheduler-elevation-level0);
+}
+
+// Table mixin
+@mixin scheduler-table {
+  width: 100%;
+  min-width: 800px;
+  background: var(--scheduler-surface);
+  
+  // Header styling
+  .mat-mdc-header-cell {
+    background: var(--scheduler-surface-container);
+    color: var(--scheduler-on-surface);
+    font-weight: var(--scheduler-font-weight-medium);
+    font-size: var(--scheduler-font-size-body);
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--scheduler-outline-variant);
+    
+    mat-icon {
+      margin-right: 8px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+    }
+  }
+  
+  // Cell styling
+  .mat-mdc-cell {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--scheduler-outline-variant);
+    vertical-align: top;
+    
+    .cell-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+  }
+  
+  // Row styling
+  .mat-mdc-row {
+    transition: background-color var(--scheduler-transition-fast);
+    
+    &:hover {
+      background: var(--scheduler-surface-container-low);
+    }
+    
+    &.selected {
+      background: var(--scheduler-primary-container);
+    }
+  }
+}
+
+// Filter section mixin
+@mixin scheduler-filter-section {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: flex-end;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  .search-field {
+    flex: 1;
+    max-width: 400px;
+    
+    @media (max-width: 768px) {
+      max-width: none;
+    }
+    
+    mat-form-field {
+      width: 100%;
+    }
+  }
+  
+  .filter-button {
+    height: 56px;
+    border-radius: 28px;
+    padding: 0 24px;
+    
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+// Loading container mixin
+@mixin scheduler-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: var(--scheduler-border-radius-small);
+  z-index: 10;
+  min-width: 200px;
+  min-height: 120px;
+  
+  .loading-text {
+    color: var(--scheduler-on-surface-variant);
+    font-size: var(--scheduler-font-size-body);
+    margin: 0;
+  }
+}
+
+// Empty state mixin
+@mixin scheduler-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  
+  .empty-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: var(--scheduler-outline);
+    margin-bottom: 16px;
+  }
+  
+  h3 {
+    font-size: 20px;
+    font-weight: var(--scheduler-font-weight-normal);
+    color: var(--scheduler-on-surface);
+    margin: 0 0 8px 0;
+  }
+  
+  p {
+    font-size: var(--scheduler-font-size-body);
+    color: var(--scheduler-on-surface-variant);
+    margin: 0;
+    max-width: 400px;
+  }
+}
+
+// Mobile responsive mixin
+@mixin scheduler-mobile-responsive {
+  @media (max-width: 600px) {
+    .mat-mdc-header-cell {
+      display: none;
+    }
+    
+    .mat-mdc-cell {
+      display: block;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--scheduler-outline-variant);
+      
+      .cell-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+    }
+    
+    .mat-mdc-row {
+      display: block;
+      margin-bottom: 8px;
+      border: 1px solid var(--scheduler-outline-variant);
+      border-radius: var(--scheduler-border-radius-small);
+      background: var(--scheduler-surface);
+    }
+  }
+}
+
+// ============================================================================
+// USAGE EXAMPLES
+// ============================================================================
+
+// Example: Using mixins in a component
+// @import '../scheduler-theme.scss';
+// 
+// .my-component {
+//   @include scheduler-container;
+//   
+//   .my-header {
+//     @include scheduler-page-header;
+//     
+//     .my-title {
+//       @include scheduler-page-title;
+//     }
+//   }
+//   
+//   .my-card {
+//     @include scheduler-card;
+//   }
+//   
+//   .my-table {
+//     @include scheduler-table;
+//   }
+// }
+
+// Example: Using CSS custom properties
+// .my-custom-element {
+//   background-color: var(--scheduler-primary);
+//   color: var(--scheduler-on-primary);
+//   padding: var(--scheduler-container-padding);
+//   border-radius: var(--scheduler-border-radius);
+//   font-size: var(--scheduler-font-size-body);
+// }

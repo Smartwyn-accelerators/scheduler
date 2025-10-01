@@ -1,0 +1,519 @@
+// Import the unified scheduler theme
+@import '../../../themes/scheduler-theme.scss';
+
+// Apply scheduler theme to this component
+:host {
+  @include sl-scheduler-theme-host;
+}
+
+.container {
+  height: 400px;
+  width: 600px;
+}
+
+.action-tool-bar {
+  // height: base.$fc-row-height5;
+  justify-content: space-between;
+}
+
+.trigger-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 0;
+}
+
+// Step sections
+.step-section {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  background: #ffffff;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .step-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--mdc-theme-primary);
+  }
+}
+
+.trigger-type {
+  display: flex;
+  gap: 24px;
+  margin-top: 12px;
+  
+  .radio-option {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+  }
+}
+
+// Help icon styling - positioned like superscript but more visible
+.help-icon {
+  font-size: 14px !important;
+  width: 14px !important;
+  height: 14px !important;
+  color: #666 !important;
+  cursor: help;
+  line-height: 1;
+  
+  &:hover {
+    color: #000000 !important;
+    transform: scale(1.1); // Slight scale on hover for better interaction
+  }
+}
+
+// Job selection section
+.job-fields {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  
+  .fc-col-md-6 {
+    flex: 1;
+    min-width: 0; // Prevents overflow
+  }
+}
+
+.select-job-btn {
+  margin-bottom: 16px;
+}
+
+// Trigger details rows
+.trigger-details-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  .fc-col-md-6 {
+    flex: 1;
+    min-width: 0; // Prevents overflow
+  }
+}
+
+// Time containers - now using mat-form-field
+.time-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  
+  .time-label {
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.6);
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+}
+
+// Checkbox container
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+// Job data section
+.job-data-section {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 24px;
+  background: #ffffff;
+  margin-top: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  .job-data-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    
+    .job-data-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: #333;
+    }
+    
+    .add-icon {
+      cursor: pointer;
+      color: #000000;
+      
+      &:hover {
+        color: #333333;
+      }
+    }
+  }
+  
+  .job-data-hint {
+    margin-bottom: 16px;
+    display: block;
+  }
+  
+  .job-data-table {
+    width: 100%;
+    min-width: 100%;
+    table-layout: fixed;
+    display: block;
+    overflow-x: auto;
+    
+    // Ensure table takes full width - target both mat-table and mat-mdc-table
+    .mat-table,
+    .mat-mdc-table {
+      width: 100%;
+      min-width: 100%;
+      table-layout: fixed;
+    }
+    
+    // Column width distribution - better space utilization
+    .mat-column-position {
+      width: 35%;
+      min-width: 150px;
+    }
+    
+    .mat-column-name {
+      width: 50%;
+      min-width: 200px;
+    }
+    
+    .mat-column-actions {
+      width: 15%;
+      min-width: 100px;
+      text-align: center;
+    }
+    
+    // Input fields take full width of their cells
+    .mat-cell,
+    .mat-mdc-cell {
+      padding: 8px 12px;
+      
+      input {
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-size: 14px;
+        
+        &::placeholder {
+          color: rgba(0, 0, 0, 0.6);
+          font-size: 14px;
+        }
+      }
+    }
+    
+    // Ensure table headers are properly aligned
+    .mat-header-cell,
+    .mat-mdc-header-cell {
+      padding: 12px;
+      font-weight: 500;
+      color: #333;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    // Remove icon styling for better alignment
+    .remove-icon {
+      color: #f44336;
+      cursor: pointer;
+      font-size: 20px;
+      
+      &:hover {
+        color: #d32f2f;
+      }
+    }
+  }
+}
+
+[hidden] {
+  display: none;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.medium-device-width {
+  width: 100%;
+}
+
+.large-device-width {
+  width: 100%;
+}
+
+table {
+  width: 100%;
+}
+
+.button-row {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.mat-form-field.mat-form-field {
+  padding-right: 1%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+td > .mat-input-element {
+  height: 36px;
+  padding: 12px;
+  background: #f5f5f5;
+  width: calc(100% - 12px);
+}
+
+// Modern Angular 20 styles
+:host {
+  --form-spacing: 16px;
+  --input-height: 36px;
+  --border-radius: 4px;
+  --background-light: #f5f5f5;
+  --step-spacing: 24px;
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+// Dialog panel styling
+::ng-deep .fc-modal-dialog {
+  .mat-dialog-container {
+    padding: 0 !important;
+    height: 80vh;
+    max-height: 80vh;
+    overflow: hidden;
+  }
+}
+
+.trigger-pop {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  
+  mat-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    
+    mat-card-header {
+      flex-shrink: 0;
+      padding: 24px 24px 16px 24px;
+    }
+    
+    mat-card-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 24px;
+      
+      // Custom scrollbar styling
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      
+      &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: #000000;
+        border-radius: 4px;
+        
+        &:hover {
+          background: #333333;
+        }
+      }
+    }
+    
+    mat-card-actions {
+      flex-shrink: 0;
+      padding: 16px 24px 24px 24px;
+      border-top: 1px solid #e0e0e0;
+      background: #fafafa;
+    }
+  }
+}
+
+.space-btw {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--form-spacing);
+}
+
+.cancle-btn {
+  color: #666;
+  text-decoration: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    color: #fff;
+    background: #000000;
+    transform: scale(1.1);
+  }
+  
+  i {
+    font-size: 20px;
+    line-height: 1;
+  }
+}
+
+.fc-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 -8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.fc-col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 0 8px;
+  margin-bottom: var(--form-spacing);
+  box-sizing: border-box;
+  min-width: 0; // Prevents flex items from overflowing
+}
+
+.fc-col-md-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 0 8px;
+  margin-bottom: var(--form-spacing);
+  box-sizing: border-box;
+}
+
+.text-success {
+  color: #000000;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.step-margin {
+  margin-top: var(--step-spacing);
+}
+
+.time-container {
+  margin-top: 8px;
+  
+  .lable-inline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+}
+
+.fc-text-right {
+  text-align: right;
+  
+  button {
+    min-width: 120px;
+    height: 48px;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    
+    &:hover {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.fc-text-center {
+  text-align: center;
+}
+
+// Ensure form fields don't overflow
+.full-width {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+// Mat form field adjustments
+.mat-form-field {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  
+  .mat-input-element {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+// Global table styling to ensure full width
+::ng-deep .job-data-table {
+  .mat-table {
+    width: 100% !important;
+    min-width: 100% !important;
+    table-layout: fixed !important;
+  }
+  
+  .mat-header-row,
+  .mat-row {
+    width: 100% !important;
+  }
+  
+  .mat-header-cell,
+  .mat-cell {
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 768px) {
+  .fc-col-md-6 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .trigger-type {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .trigger-details-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .job-fields {
+    flex-direction: column;
+    gap: 8px;
+  }
+}

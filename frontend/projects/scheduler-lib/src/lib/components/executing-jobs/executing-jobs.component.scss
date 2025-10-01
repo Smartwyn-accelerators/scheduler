@@ -1,0 +1,316 @@
+// Import the unified scheduler theme
+@import '../../themes/scheduler-theme.scss';
+
+// Apply scheduler theme to this component
+:host {
+    @include sl-scheduler-theme-host;
+}
+
+// Angular 20 Material Design 3 styling
+.executing-jobs-container {
+  padding: 24px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+// Page Header
+.page-header {
+  margin-bottom: 32px;
+  
+  .page-title {
+    font-size: 32px;
+    font-weight: 400;
+    margin: 0 0 8px 0;
+    color: var(--mdc-theme-on-surface);
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    mat-icon {
+      font-size: 32px;
+      width: 32px;
+      height: 32px;
+      color: var(--mdc-theme-primary);
+    }
+  }
+  
+  .page-subtitle {
+    font-size: 16px;
+    color: var(--mdc-theme-on-surface-variant);
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+
+// Main Card
+.executing-jobs-card {
+  border-radius: 28px;
+  box-shadow: var(--mdc-elevation-level2, 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24));
+  overflow: hidden;
+  
+  mat-card-header {
+    padding: 24px 24px 16px 24px;
+    
+    mat-card-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--mdc-theme-on-surface);
+      
+      mat-icon {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+        color: var(--mdc-theme-primary);
+      }
+    }
+    
+    mat-card-subtitle {
+      font-size: 14px;
+      color: var(--mdc-theme-on-surface-variant);
+      margin-top: 4px;
+    }
+  }
+  
+  mat-card-content {
+    padding: 0 24px 24px 24px;
+  }
+  
+  mat-card-actions {
+    padding: 16px 24px 24px 24px;
+    gap: 12px;
+    
+    button {
+      border-radius: 20px;
+      text-transform: none;
+      font-weight: 500;
+      
+      mat-icon {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+// Table Section
+.table-section {
+  position: relative;
+  padding: 16px;
+  background: var(--mdc-theme-surface);
+  border-radius: 16px;
+  box-shadow: var(--mdc-elevation-level1, 0 1px 2px rgba(0,0,0,0.08));
+}
+
+.table-container {
+  overflow-x: auto;
+  border-radius: 12px;
+  background: var(--mdc-theme-surface);
+  box-shadow: var(--mdc-elevation-level0, 0 0 0 rgba(0,0,0,0));
+}
+
+.executing-table {
+  width: 100%;
+  min-width: 1000px;
+  background: var(--mdc-theme-surface, #ffffff);
+  
+  // Header styling
+  .mat-mdc-header-cell {
+    background: var(--mdc-theme-surface-container, #f3edf7);
+    color: var(--mdc-theme-on-surface, #1c1b1f);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--mdc-theme-outline-variant, #cac4d0);
+    
+    mat-icon {
+      margin-right: 8px;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+      vertical-align: middle;
+    }
+  }
+  
+  // Cell styling
+  .mat-mdc-cell {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--mdc-theme-outline-variant, #cac4d0);
+    vertical-align: top;
+    
+    .cell-content {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .trigger-name, .job-name {
+      font-weight: 500;
+      color: var(--mdc-theme-on-surface, #1c1b1f);
+    }
+    
+    .job-class {
+      font-family: 'Roboto Mono', monospace;
+      font-size: 12px;
+      color: var(--mdc-theme-on-surface-variant, #49454f);
+      background: var(--mdc-theme-surface-container-low, #f7f2fa);
+      padding: 4px 8px;
+      border-radius: 8px;
+    }
+    
+    .timestamp {
+      font-size: 13px;
+      color: var(--mdc-theme-on-surface-variant, #49454f);
+    }
+  }
+  
+  // Row styling
+  .executing-row {
+    transition: background-color 0.2s ease;
+    
+    &:hover {
+      background: var(--mdc-theme-surface-container-low, #f7f2fa);
+    }
+    
+    &.selected {
+      background: var(--mdc-theme-primary-container, #e8def8);
+    }
+  }
+}
+
+// Loading State
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  gap: 16px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  z-index: 10;
+  min-width: 200px;
+  min-height: 120px;
+  
+  .loading-text {
+    color: var(--mdc-theme-on-surface-variant, #49454f);
+    font-size: 14px;
+    margin: 0;
+  }
+}
+
+// Empty State
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  
+  .empty-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: var(--mdc-theme-outline, #79747e);
+    margin-bottom: 16px;
+  }
+  
+  h3 {
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--mdc-theme-on-surface, #1c1b1f);
+    margin: 0 0 8px 0;
+  }
+  
+  p {
+    font-size: 14px;
+    color: var(--mdc-theme-on-surface-variant, #49454f);
+    margin: 0;
+    max-width: 400px;
+  }
+}
+
+// Mobile Responsive Design
+.mobile-label {
+  display: none;
+  font-weight: 500;
+  color: var(--mdc-theme-primary);
+  margin-right: 8px;
+  min-width: 120px;
+}
+
+@media (max-width: 768px) {
+  .executing-jobs-container {
+    padding: 16px;
+  }
+  
+  .page-header {
+    margin-bottom: 24px;
+    
+    .page-title {
+      font-size: 24px;
+    }
+  }
+  
+  .executing-jobs-card {
+    mat-card-header {
+      padding: 16px;
+      
+      mat-card-title {
+        font-size: 20px;
+      }
+    }
+    
+    mat-card-content {
+      padding: 0 16px 16px 16px;
+    }
+    
+    mat-card-actions {
+      padding: 12px 16px 16px 16px;
+      flex-direction: column;
+      align-items: stretch;
+      
+      button {
+        width: 100%;
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .mobile-label {
+    display: inline-block;
+  }
+  
+  .mat-mdc-header-cell {
+    display: none;
+  }
+  
+  .mat-mdc-cell {
+    display: block;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--mdc-theme-outline-variant, #cac4d0);
+    
+    .cell-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+  }
+  
+  .executing-row {
+    display: block;
+    margin-bottom: 8px;
+    border: 1px solid var(--mdc-theme-outline-variant, #cac4d0);
+    border-radius: 12px;
+    background: var(--mdc-theme-surface, #ffffff);
+  }
+}

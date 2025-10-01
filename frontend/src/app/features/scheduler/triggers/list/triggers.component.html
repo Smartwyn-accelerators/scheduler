@@ -1,0 +1,232 @@
+<div class="triggers-container" (onScroll)="onTableScroll()" appVirtualScroll>
+  <!-- Header Section -->
+  <div class="page-header">
+    <h1 class="page-title">
+      <mat-icon>schedule</mat-icon>
+      {{ 'TRIGGERS.TITLE' | translate }}
+    </h1>
+    <p class="page-subtitle">{{ 'TRIGGERS.SUBTITLE' | translate }}</p>
+  </div>
+
+  <!-- Main Content Card -->
+  <mat-card class="triggers-card">
+    <mat-card-header>
+      <div class="card-header-actions">
+        <button mat-raised-button color="primary" (click)="add()">
+          <mat-icon>add_circle_outline</mat-icon>
+          <span>&nbsp;{{ 'TRIGGERS.ACTIONS.ADD-TRIGGER' | translate }}</span>
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="filter-section">
+        <app-list-filters [columnsList]="columns" (onSearch)="applyFilter($event)"></app-list-filters>
+      </div>
+        
+      <!-- Data Table Section -->
+      <div class="table-section">
+        <!-- Loading Spinner -->
+        <div class="empty-state" *ngIf="isLoadingResults()">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p class="loading-text">{{ 'TRIGGERS.LOADING' | translate }}</p>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-container" *ngIf="!isLoadingResults() && triggers().length > 0">
+          <table mat-table matSort [dataSource]="dataSource()" class="triggers-table">
+            <!-- Trigger Name Column -->
+            <ng-container matColumnDef="triggerName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ 'TRIGGERS.FIELDS.NAME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.NAME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="trigger-name">{{ trigger.triggerName | titlecase }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Trigger Group Column -->
+            <ng-container matColumnDef="triggerGroup">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>folder</mat-icon>
+                {{ 'TRIGGERS.FIELDS.GROUP' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.GROUP' | translate }}</span>
+                <div class="cell-content">
+                  <mat-chip>{{ trigger.triggerGroup | titlecase }}</mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Name Column -->
+            <ng-container matColumnDef="jobName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>work</mat-icon>
+                {{ 'TRIGGERS.FIELDS.JOB-NAME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.JOB-NAME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="job-name">{{ trigger.jobName | titlecase }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Group Column -->
+            <ng-container matColumnDef="jobGroup">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>folder_open</mat-icon>
+                {{ 'TRIGGERS.FIELDS.JOB-GROUP' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.JOB-GROUP' | translate }}</span>
+                <div class="cell-content">
+                  <mat-chip>{{ trigger.jobGroup | titlecase }}</mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Trigger Type Column -->
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>category</mat-icon>
+                {{ 'TRIGGERS.FIELDS.TYPE' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.TYPE' | translate }}</span>
+                <div class="cell-content">
+                  <mat-chip [class]="'trigger-type-' + trigger.triggerType?.toLowerCase()">
+                    {{ trigger.triggerType | titlecase }}
+                  </mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Next Execution Time Column -->
+            <ng-container matColumnDef="nextExecutionTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ 'TRIGGERS.FIELDS.NEXT-EXECUTION-TIME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.NEXT-EXECUTION-TIME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="execution-time">{{ trigger.nextExecutionTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Last Execution Time Column -->
+            <ng-container matColumnDef="lastExecutionTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>history</mat-icon>
+                {{ 'TRIGGERS.FIELDS.LAST-EXECUTION-TIME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.LAST-EXECUTION-TIME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="execution-time">{{ trigger.lastExecutionTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Start Time Column -->
+            <ng-container matColumnDef="startTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>play_arrow</mat-icon>
+                {{ 'TRIGGERS.FIELDS.START-TIME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.START-TIME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="execution-time">{{ trigger.startTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- End Time Column -->
+            <ng-container matColumnDef="endTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>stop</mat-icon>
+                {{ 'TRIGGERS.FIELDS.END-TIME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger">
+                <span class="mobile-label">{{ 'TRIGGERS.FIELDS.END-TIME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="execution-time">{{ trigger.endTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>settings</mat-icon>
+                {{ 'SCHEDULER-GENERAL.ACTIONS.ACTIONS' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let trigger; let i = index">
+                <span class="mobile-label">{{ 'SCHEDULER-GENERAL.ACTIONS.ACTIONS' | translate }}</span>
+                <div class="cell-content">
+                  <button
+                    mat-icon-button
+                    aria-label="Edit trigger"
+                    [matTooltip]="'SCHEDULER-GENERAL.ACTIONS.EDIT' | translate"
+                    routerLink="/scheduler/triggers/{{ trigger.triggerName }}/{{ trigger.triggerGroup }}"
+                  >
+                    <mat-icon>open_in_new</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    color="accent"
+                    *ngIf="trigger.triggerState != 'PAUSED'"
+                    [matTooltip]="'SCHEDULER-GENERAL.ACTIONS.PAUSE' | translate"
+                    (click)="pauseTrigger(trigger)"
+                  >
+                    <mat-icon color="primary">pause_circle_filled</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    color="accent"
+                    *ngIf="trigger.triggerState == 'PAUSED'"
+                    [matTooltip]="'SCHEDULER-GENERAL.ACTIONS.RESUME' | translate"
+                    (click)="resumeTrigger(trigger)"
+                  >
+                    <mat-icon color="primary">play_circle_filled</mat-icon>
+                  </button>
+                  <button
+                    mat-icon-button
+                    color="accent"
+                    [matTooltip]="'SCHEDULER-GENERAL.ACTIONS.DELETE' | translate"
+                    (click)="deleteTrigger(trigger)"
+                  >
+                    <mat-icon color="warn">delete</mat-icon>
+                  </button>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Header Row -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <!-- Data Rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" 
+                class="trigger-row"
+                [class.selected]="false">
+            </tr>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="!isLoadingResults() && triggers().length === 0">
+          <mat-icon class="empty-icon">schedule</mat-icon>
+          <h3>{{ 'TRIGGERS.EMPTY-TITLE' | translate }}</h3>
+          <p>{{ 'TRIGGERS.EMPTY-MESSAGE' | translate }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

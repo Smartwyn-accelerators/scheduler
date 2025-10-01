@@ -1,0 +1,183 @@
+<div class="execution-history-container" (onScroll)="onTableScroll()">
+  <!-- Header Section -->
+  <div class="page-header">
+    
+    <h1 class="page-title"> <mat-icon>history</mat-icon> {{ translationService.instant('EXECUTION-HISTORY.TITLE') }}</h1>
+    <p class="page-subtitle">{{ translationService.instant('EXECUTION-HISTORY.SUBTITLE') }}</p>
+  </div>
+
+  <!-- Main Content Card -->
+  <mat-card class="execution-history-card">
+    <mat-card-header>
+      <!-- <mat-card-title>
+        {{ 'EXECUTION-HISTORY.CARD-TITLE' | translate }}
+      </mat-card-title>
+      <mat-card-subtitle>{{ 'EXECUTION-HISTORY.CARD-SUBTITLE' | translate }}</mat-card-subtitle> -->
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="filter-section">
+        <sl-list-filters [columnsList]="columns" (onSearch)="applyFilter($event)"></sl-list-filters>
+      </div>
+        
+      <!-- Data Table Section -->
+      <div class="table-section">
+        <!-- Loading Spinner -->
+        <div class="empty-state" *ngIf="isLoadingResults()">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p class="loading-text">{{ translationService.instant('EXECUTION-HISTORY.LOADING') }}</p>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-container" *ngIf="!isLoadingResults()">
+          <table mat-table matSort [dataSource]="dataSource()" class="execution-table">
+            <!-- Trigger Name Column -->
+            <ng-container matColumnDef="triggerName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.TRIGGER-NAME') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.TRIGGER-NAME') }}</span>
+                <div class="cell-content">
+                  <span class="trigger-name">{{ element.triggerName }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Trigger Group Column -->
+            <ng-container matColumnDef="triggerGroup">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>group_work</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.TRIGGER-GROUP') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.TRIGGER-GROUP') }}</span>
+                <div class="cell-content">
+                  <mat-chip>{{ element.triggerGroup }}</mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Name Column -->
+            <ng-container matColumnDef="jobName">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>work</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.JOB-NAME') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.JOB-NAME') }}</span>
+                <div class="cell-content">
+                  <span class="job-name">{{ element.jobName }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Group Column -->
+            <ng-container matColumnDef="jobGroup">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>folder</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.JOB-GROUP') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.JOB-GROUP') }}</span>
+                <div class="cell-content">
+                  <mat-chip>{{ element.jobGroup }}</mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Class Column -->
+            <ng-container matColumnDef="jobClass">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>code</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.JOB-CLASS') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.JOB-CLASS') }}</span>
+                <div class="cell-content">
+                  <span class="job-class">{{ element.jobClass }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Status Column -->
+            <ng-container matColumnDef="jobStatus">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>flag</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.STATUS') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.STATUS') }}</span>
+                <div class="cell-content">
+                  <mat-chip [color]="getStatusColor(element.jobStatus)">
+                    <mat-icon>{{ getStatusIcon(element.jobStatus) }}</mat-icon>
+                    {{ element.jobStatus }}
+                  </mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Duration Column -->
+            <ng-container matColumnDef="duration">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>timer</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.DURATION') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.DURATION') }}</span>
+                <div class="cell-content">
+                  <span class="duration">{{ element.duration }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Fired Time Column -->
+            <ng-container matColumnDef="firedTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.FIRE-TIME') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.FIRE-TIME') }}</span>
+                <div class="cell-content">
+                  <span class="timestamp">{{ element.firedTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Finished Time Column -->
+            <ng-container matColumnDef="finishedTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>check_circle</mat-icon>
+                {{ translationService.instant('EXECUTION-HISTORY.FIELDS.FINISHED-TIME') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTION-HISTORY.FIELDS.FINISHED-TIME') }}</span>
+                <div class="cell-content">
+                  <span class="timestamp">{{ element.finishedTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Header Row -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsExecutionHistory"></tr>
+            <!-- Data Rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutionHistory" 
+                class="execution-row"
+                [class.selected]="false">
+            </tr>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="!isLoadingResults() && executionHistory().length === 0">
+          <mat-icon class="empty-icon">history</mat-icon>
+          <h3>{{ translationService.instant('EXECUTION-HISTORY.EMPTY-TITLE') }}</h3>
+          <p>{{ translationService.instant('EXECUTION-HISTORY.EMPTY-MESSAGE') }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

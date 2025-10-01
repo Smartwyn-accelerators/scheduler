@@ -1,0 +1,39 @@
+<div class="sl-confirm-dialog-container">
+  <!-- Dialog Header -->
+  <div mat-dialog-title class="sl-dialog-header">
+    <h2 class="sl-dialog-title">{{ title() }}</h2>
+    <button 
+      mat-icon-button 
+      color="warn" 
+      (click)="onCancel()"
+      class="sl-close-button"
+      aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- Dialog Content -->
+  <div mat-dialog-content class="sl-dialog-content">
+    <div class="sl-message-container">
+      <mat-icon class="sl-warning-icon">warning</mat-icon>
+      <div class="sl-message-text" [innerHTML]="confirmMessage()"></div>
+    </div>
+  </div>
+
+  <!-- Dialog Actions -->
+  <div mat-dialog-actions class="sl-dialog-actions">
+    <button 
+      mat-button 
+      (click)="onCancel()"
+      class="sl-cancel-button">
+      {{ translate.instant('SCHEDULER-GENERAL.BUTTONS.CANCEL', 'Cancel') }}
+    </button>
+    <button 
+      mat-raised-button 
+      color="warn" 
+      (click)="onConfirm()"
+      class="sl-confirm-button">
+      {{ action() }}
+    </button>
+  </div>
+</div>

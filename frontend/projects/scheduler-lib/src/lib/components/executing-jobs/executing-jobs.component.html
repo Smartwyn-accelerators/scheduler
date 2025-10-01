@@ -1,0 +1,143 @@
+<div class="executing-jobs-container">
+  <!-- Header Section -->
+  <div class="page-header">
+    <h1 class="page-title"> <mat-icon>play_circle</mat-icon> {{ translationService.instant('EXECUTING-JOBS.TITLE') }}</h1>
+    <p class="page-subtitle">{{ translationService.instant('EXECUTING-JOBS.SUBTITLE') }}</p>
+  </div>
+
+  <!-- Main Content Card -->
+  <mat-card class="executing-jobs-card">
+    <mat-card-header>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Data Table Section -->
+      <div class="table-section">
+        <!-- Loading Spinner -->
+        <div class="empty-state" *ngIf="isLoadingResults()">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p class="loading-text">{{ translationService.instant('EXECUTING-JOBS.LOADING') }}</p>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-container" *ngIf="!isLoadingResults() && executingJobs().length > 0">
+          <table mat-table matSort [dataSource]="dataSource()" class="executing-table">
+            <!-- Trigger Name Column -->
+            <ng-container matColumnDef="triggerName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ translationService.instant('EXECUTING-JOBS.FIELDS.TRIGGER-NAME') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTING-JOBS.FIELDS.TRIGGER-NAME') }}</span>
+                <div class="cell-content">
+                  <span class="trigger-name">{{ element.triggerName }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Trigger Group Column -->
+            <ng-container matColumnDef="triggerGroup">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>group_work</mat-icon>
+                {{ translationService.instant('EXECUTING-JOBS.FIELDS.TRIGGER-GROUP') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTING-JOBS.FIELDS.TRIGGER-GROUP') }}</span>
+                <div class="cell-content">
+                  <mat-chip>{{ element.triggerGroup }}</mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Name Column -->
+            <ng-container matColumnDef="jobName">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>work</mat-icon>
+                {{ translationService.instant('EXECUTING-JOBS.FIELDS.JOB-NAME') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTING-JOBS.FIELDS.JOB-NAME') }}</span>
+                <div class="cell-content">
+                  <span class="job-name">{{ element.jobName }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Group Column -->
+            <ng-container matColumnDef="jobGroup">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>folder</mat-icon>
+                {{ translationService.instant('EXECUTING-JOBS.FIELDS.JOB-GROUP') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTING-JOBS.FIELDS.JOB-GROUP') }}</span>
+                <div class="cell-content">
+                  <mat-chip>{{ element.jobGroup }}</mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Class Column -->
+            <ng-container matColumnDef="jobClass">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>code</mat-icon>
+                {{ translationService.instant('EXECUTING-JOBS.FIELDS.JOB-CLASS') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTING-JOBS.FIELDS.JOB-CLASS') }}</span>
+                <div class="cell-content">
+                  <span class="job-class">{{ element.jobClass }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Fired Time Column -->
+            <ng-container matColumnDef="firedTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ translationService.instant('EXECUTING-JOBS.FIELDS.FIRE-TIME') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTING-JOBS.FIELDS.FIRE-TIME') }}</span>
+                <div class="cell-content">
+                  <span class="timestamp">{{ element.firedTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Next Execution Time Column -->
+            <ng-container matColumnDef="nextExecutionTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ translationService.instant('EXECUTING-JOBS.FIELDS.NEXT-FIRE-TIME') }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ translationService.instant('EXECUTING-JOBS.FIELDS.NEXT-FIRE-TIME') }}</span>
+                <div class="cell-content">
+                  <span class="timestamp">{{ element.nextExecutionTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Header Row -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsExecutingJobs"></tr>
+            <!-- Data Rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutingJobs" 
+                class="executing-row"
+                [class.selected]="false">
+            </tr>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="!isLoadingResults() && executingJobs().length === 0">
+          <mat-icon class="empty-icon">play_circle</mat-icon>
+          <h3>{{ translationService.instant('EXECUTING-JOBS.EMPTY-TITLE') }}</h3>
+          <p>{{ translationService.instant('EXECUTING-JOBS.EMPTY-MESSAGE') }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

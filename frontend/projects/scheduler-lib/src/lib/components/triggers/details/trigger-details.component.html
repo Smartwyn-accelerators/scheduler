@@ -1,0 +1,369 @@
+<div class="trigger-details-container" *ngIf="trigger()">
+  <!-- Header Section -->
+  <div class="page-header">
+    <h1 class="page-title">
+      <mat-icon>schedule</mat-icon>
+      {{ translationService.instant('TRIGGERS.DETAILS.TITLE') }}
+    </h1>
+    <p class="page-subtitle">{{ translationService.instant('TRIGGERS.DETAILS.SUBTITLE') }}</p>
+  </div>
+
+  <!-- Main Content Card -->
+  <mat-card class="trigger-details-card">
+    <mat-card-header>
+      <div class="card-header-actions">
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onSubmit()"
+          [disabled]="!isFormValid() || loading()">
+          <mat-icon *ngIf="!loading()">save</mat-icon>
+          <mat-spinner *ngIf="loading()" diameter="20" class="button-spinner"></mat-spinner>
+          <span>&nbsp;{{ translationService.instant('SCHEDULER-GENERAL.ACTIONS.SAVE') }}</span>
+        </button>
+        <button 
+          mat-raised-button 
+          (click)="back()">
+          <mat-icon>arrow_back</mat-icon>
+          <span>&nbsp;{{ translationService.instant('SCHEDULER-GENERAL.ACTIONS.BACK') }}</span>
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Loading Spinner -->
+      <div class="empty-state" *ngIf="loading()">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p class="loading-text">{{ translationService.instant('TRIGGERS.LOADING') }}</p>
+      </div>
+
+      <!-- Trigger Information Form -->
+      <div class="form-section" *ngIf="!loading()">
+        <form [formGroup]="triggerForm" #jobNgForm="ngForm" (ngSubmit)="onSubmit()" class="trigger-form">
+          <div class="form-grid">
+            <!-- Step 1: Job Information -->
+            <div class="step-section">
+              <label class="step-label">Step 1: Job Information</label>
+              <div class="form-row">
+                <!-- Job Name -->
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.JOB-NAME') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.JOB-NAME-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input 
+                    formControlName="jobName" 
+                    matInput 
+                    readonly
+                    [placeholder]="translationService.instant('TRIGGERS.FIELDS.JOB-NAME-PLACEHOLDER')" />
+                  <mat-error>{{ getErrorMessage('jobName') }}</mat-error>
+                </mat-form-field>
+
+                <!-- Job Group -->
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.JOB-GROUP') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.JOB-GROUP-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input 
+                    formControlName="jobGroup" 
+                    matInput 
+                    readonly
+                    [placeholder]="translationService.instant('TRIGGERS.FIELDS.JOB-GROUP-PLACEHOLDER')" />
+                  <mat-error>{{ getErrorMessage('jobGroup') }}</mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <!-- Step 2: Trigger Details -->
+            <div class="step-section">
+              <label class="step-label">Step 2: Trigger Details</label>
+              
+              <!-- Basic Trigger Info -->
+              <div class="form-row">
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.NAME') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.NAME-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input formControlName="triggerName" readonly matInput />
+                  <mat-error>{{ getErrorMessage('triggerName') }}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.GROUP') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.GROUP-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input formControlName="triggerGroup" readonly matInput />
+                  <mat-error>{{ getErrorMessage('triggerGroup') }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Start Date/Time -->
+              <div class="form-row">
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.START-DATE') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.START-DATE-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input matInput [matDatepicker]="startDatePicker" formControlName="startDate" />
+                  <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #startDatePicker></mat-datepicker>
+                  <mat-error>{{ getErrorMessage('startDate') }}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.START-TIME') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.START-TIME-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input type="time" formControlName="startTime" matInput />
+                  <mat-error>{{ getErrorMessage('startTime') }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- End Date/Time -->
+              <div class="form-row">
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.END-DATE') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.END-DATE-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input matInput [matDatepicker]="endDatePicker" formControlName="endDate" />
+                  <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #endDatePicker></mat-datepicker>
+                  <mat-error>{{ getErrorMessage('endDate') }}</mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.END-TIME') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.END-TIME-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input type="time" formControlName="endTime" matInput />
+                  <mat-error>{{ getErrorMessage('endTime') }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Execution Times (Read-only) -->
+              <div class="form-row">
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.LAST-EXECUTION-TIME') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.LAST-EXECUTION-TIME-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input formControlName="lastExecutionTime" readonly matInput />
+                </mat-form-field>
+
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.NEXT-EXECUTION-TIME') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.NEXT-EXECUTION-TIME-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input formControlName="nextExecutionTime" readonly matInput />
+                </mat-form-field>
+              </div>
+
+              <!-- Cron Expression (for Cron triggers) -->
+              <div class="form-row" *ngIf="triggerForm?.get('triggerType')?.value === 'Cron'">
+                <mat-form-field class="form-field" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.CRON-EXPRESSION') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.CRON-EXPRESSION-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input formControlName="cronExpression" matInput />
+                  <mat-error>{{ getErrorMessage('cronExpression') }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Repeat Interval (for Simple triggers) -->
+              <div class="form-row" *ngIf="triggerForm?.get('triggerType')?.value === 'Simple'">
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.REPEAT-INTERVAL') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.REPEAT-INTERVAL-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input type="number" formControlName="repeatInterval" matInput />
+                  <mat-error>{{ getErrorMessage('repeatInterval') }}</mat-error>
+                </mat-form-field>
+
+                <div class="checkbox-container">
+                  <mat-checkbox formControlName="repeatIndefinitely">
+                    {{ translationService.instant('TRIGGERS.FIELDS.REPEAT-INDEFINITELY') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.REPEAT-INDEFINITELY-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-checkbox>
+                </div>
+              </div>
+
+              <!-- Repeat Count (for Simple triggers when not indefinite) -->
+              <div class="form-row" 
+                   *ngIf="triggerForm?.get('triggerType')?.value === 'Simple' && !triggerForm?.get('repeatIndefinitely')?.value">
+                <mat-form-field class="form-field-half" appearance="fill">
+                  <mat-label>
+                    {{ translationService.instant('TRIGGERS.FIELDS.REPEAT-COUNT') }}
+                    <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.REPEAT-COUNT-HELP') }}" class="help-icon">help_outline</mat-icon>
+                  </mat-label>
+                  <input type="number" formControlName="repeatCount" matInput />
+                  <mat-error>{{ getErrorMessage('repeatCount') }}</mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Description -->
+              <mat-form-field class="form-field-full" appearance="fill">
+                <mat-label>
+                  {{ translationService.instant('TRIGGERS.FIELDS.DESCRIPTION') }}
+                  <mat-icon matTooltip="{{ translationService.instant('TRIGGERS.FIELDS.DESCRIPTION-HELP') }}" class="help-icon">help_outline</mat-icon>
+                </mat-label>
+                <textarea formControlName="description" matInput rows="3"></textarea>
+                <mat-error>{{ getErrorMessage('description') }}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tabs Section -->
+      <div class="tabs-section" *ngIf="!loading()">
+        <mat-tab-group class="trigger-tabs" [disableRipple]="true">
+          <!-- Job Data Tab -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>data_object</mat-icon>
+              {{ translationService.instant('TRIGGERS.FIELDS.JOB-MAP-DATA') }}
+            </ng-template>
+            
+            <div class="tab-content">
+              <div class="tab-header">
+                <h3 class="tab-title">{{ translationService.instant('JOB-DATA.TITLE') }}</h3>
+                <button 
+                  mat-raised-button 
+                  color="primary" 
+                  (click)="addJobData()">
+                  <mat-icon>add</mat-icon>
+                  <span>&nbsp;{{ translationService.instant('JOB-DATA.ADD-NEW') }}</span>
+                </button>
+              </div>
+              
+              <div class="table-container" *ngIf="hasTriggerMapData()">
+                <table mat-table [dataSource]="dataSourceJobData()" class="job-data-table">
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>vpn_key</mat-icon>
+                      {{ translationService.instant('JOB-DATA.KEY') }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ translationService.instant('JOB-DATA.KEY') }}</span>
+                      <div class="cell-content">
+                        <mat-form-field appearance="outline" class="table-input">
+                          <input
+                            matInput
+                            [(ngModel)]="element.dataKey"
+                            [ngModelOptions]="{ standalone: true }"
+                            [placeholder]="translationService.instant('JOB-DATA.KEY-PLACEHOLDER')" />
+                        </mat-form-field>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>text_fields</mat-icon>
+                      {{ translationService.instant('JOB-DATA.VALUE') }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ translationService.instant('JOB-DATA.VALUE') }}</span>
+                      <div class="cell-content">
+                        <mat-form-field appearance="outline" class="table-input">
+                          <input
+                            matInput
+                            [(ngModel)]="element.dataValue"
+                            [ngModelOptions]="{ standalone: true }"
+                            [placeholder]="translationService.instant('JOB-DATA.VALUE-PLACEHOLDER')" />
+                        </mat-form-field>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>settings</mat-icon>
+                      {{ translationService.instant('SCHEDULER-GENERAL.ACTIONS.ACTIONS') }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                      <span class="mobile-label">{{ translationService.instant('SCHEDULER-GENERAL.ACTIONS.ACTIONS') }}</span>
+                      <div class="cell-content">
+                        <button 
+                          mat-icon-button 
+                          (click)="removeJobData(i)"
+                          color="warn"
+                          [matTooltip]="translationService.instant('JOB-DATA.REMOVE')">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns" class="job-data-row"></tr>
+                </table>
+              </div>
+
+              <!-- Empty State for Job Data -->
+              <div class="empty-state" *ngIf="!hasTriggerMapData()">
+                <mat-icon class="empty-icon">data_object</mat-icon>
+                <h3>{{ translationService.instant('JOB-DATA.EMPTY-TITLE') }}</h3>
+                <p>{{ translationService.instant('JOB-DATA.EMPTY-MESSAGE') }}</p>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- Execution History Tab -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>history</mat-icon>
+              {{ translationService.instant('EXECUTION-HISTORY.TITLE') }}
+            </ng-template>
+            
+            <div class="tab-content">
+              <div class="tab-header">
+                <h3 class="tab-title">{{ translationService.instant('EXECUTION-HISTORY.ASSOCIATED-HISTORY') }}</h3>
+              </div>
+              
+              <div class="table-container" *ngIf="hasExecutionHistory()">
+                <table mat-table [dataSource]="dataSourceExecutionHistory()" class="execution-history-table">
+                  <ng-container *ngFor="let column of executionHistorycolumns" [matColumnDef]="column.column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      <mat-icon *ngIf="column.column === 'jobStatus'">flag</mat-icon>
+                      <mat-icon *ngIf="column.column === 'duration'">timer</mat-icon>
+                      <mat-icon *ngIf="column.column === 'firedTime'">schedule</mat-icon>
+                      <mat-icon *ngIf="column.column === 'finishedTime'">check_circle</mat-icon>
+                      {{ column.label }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ column.label }}</span>
+                      <div class="cell-content">
+                        <span *ngIf="column.type !== ListColumnType.Date">{{ element[column.column] }}</span>
+                        <span *ngIf="column.type === ListColumnType.Date" class="timestamp">{{ element[column.column] | date: 'medium' }}</span>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsExecutionHistory"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutionHistory" class="execution-row"></tr>
+                </table>
+              </div>
+
+              <!-- Empty State for Execution History -->
+              <div class="empty-state" *ngIf="!hasExecutionHistory()">
+                <mat-icon class="empty-icon">history</mat-icon>
+                <h3>{{ translationService.instant('EXECUTION-HISTORY.EMPTY-TITLE') }}</h3>
+                <p>{{ translationService.instant('EXECUTION-HISTORY.EMPTY-MESSAGE') }}</p>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

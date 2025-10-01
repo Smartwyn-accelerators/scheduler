@@ -1,0 +1,354 @@
+<div class="job-details-container" *ngIf="job()">
+  <!-- Header Section -->
+  <div class="page-header">
+    <h1 class="page-title">
+      <mat-icon>work</mat-icon>
+      {{ 'JOBS.DETAILS.TITLE' | translate }}
+    </h1>
+    <p class="page-subtitle">{{ 'JOBS.DETAILS.SUBTITLE' | translate }}</p>
+  </div>
+
+  <!-- Main Content Card -->
+  <mat-card class="job-details-card">
+    <mat-card-header>
+      <div class="card-header-actions">
+        <button 
+          mat-raised-button 
+          color="primary"
+          (click)="onSubmit()"
+          [disabled]="!isFormValid() || loading()">
+          <mat-icon *ngIf="!loading()">save</mat-icon>
+          <mat-spinner *ngIf="loading()" diameter="20" class="button-spinner"></mat-spinner>
+          <span>&nbsp;{{ 'SCHEDULER-GENERAL.ACTIONS.SAVE' | translate }}</span>
+        </button>
+        <button 
+          mat-raised-button 
+          (click)="back()">
+          <mat-icon>arrow_back</mat-icon>
+          <span>&nbsp;{{ 'SCHEDULER-GENERAL.ACTIONS.BACK' | translate }}</span>
+        </button>
+      </div>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Loading Spinner -->
+      <div class="empty-state" *ngIf="loading()">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p class="loading-text">{{ 'JOBS.LOADING' | translate }}</p>
+      </div>
+
+      <!-- Job Information Form -->
+      <div class="form-section" *ngIf="!loading()">
+        <form [formGroup]="jobForm" #jobNgForm="ngForm" (ngSubmit)="onSubmit()" class="job-form">
+          <div class="form-grid">
+            <!-- Row 1: Name and Group side by side -->
+            <div class="form-row">
+              <!-- Job Name -->
+              <mat-form-field class="form-field-half" appearance="fill">
+                <mat-label>
+                  {{ 'JOBS.FIELDS.NAME' | translate }}
+                  <mat-icon matTooltip="{{ 'JOBS.FIELDS.NAME-HELP' | translate }}" class="help-icon">help_outline</mat-icon>
+                </mat-label>
+                <input 
+                  formControlName="jobName" 
+                  matInput 
+                  readonly
+                  [placeholder]="'JOBS.FIELDS.NAME-PLACEHOLDER' | translate" />
+                <mat-error>{{ getErrorMessage('jobName') }}</mat-error>
+              </mat-form-field>
+
+              <!-- Job Group -->
+              <mat-form-field class="form-field-half" appearance="fill">
+                <mat-label>
+                  {{ 'JOBS.FIELDS.GROUP' | translate }}
+                  <mat-icon matTooltip="{{ 'JOBS.FIELDS.GROUP-HELP' | translate }}" class="help-icon">help_outline</mat-icon>
+                </mat-label>
+                <input 
+                  formControlName="jobGroup" 
+                  matInput 
+                  readonly
+                  [placeholder]="'JOBS.FIELDS.GROUP-PLACEHOLDER' | translate" />
+                <mat-error>{{ getErrorMessage('jobGroup') }}</mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Row 2: Class spanning one column -->
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>
+                {{ 'JOBS.FIELDS.CLASS' | translate }}
+                <mat-icon matTooltip="{{ 'JOBS.FIELDS.CLASS-HELP' | translate }}" class="help-icon">help_outline</mat-icon>
+              </mat-label>
+              <input 
+                formControlName="jobClass" 
+                matInput 
+                readonly
+                [placeholder]="'JOBS.FIELDS.CLASS-PLACEHOLDER' | translate" />
+              <mat-error>{{ getErrorMessage('jobClass') }}</mat-error>
+            </mat-form-field>
+
+            <!-- Row 3: Description spanning both columns -->
+            <mat-form-field class="form-field-full" appearance="fill">
+              <mat-label>
+                {{ 'JOBS.FIELDS.DESCRIPTION' | translate }}
+                <mat-icon matTooltip="{{ 'JOBS.FIELDS.DESCRIPTION-HELP' | translate }}" class="help-icon">help_outline</mat-icon>
+              </mat-label>
+              <textarea 
+                formControlName="jobDescription" 
+                matInput 
+                [placeholder]="'JOBS.FIELDS.DESCRIPTION-PLACEHOLDER' | translate"
+                rows="3"></textarea>
+              <mat-error>{{ getErrorMessage('jobDescription') }}</mat-error>
+            </mat-form-field>
+
+            <!-- Row 4: Durable Checkbox -->
+            <div class="checkbox-container">
+              <mat-checkbox formControlName="isDurable" class="durable-checkbox">
+                {{ 'JOBS.FIELDS.IS-DURABLE' | translate }}
+                <mat-icon matTooltip="{{ 'JOBS.FIELDS.IS-DURABLE-HELP' | translate }}" class="help-icon">help_outline</mat-icon>
+              </mat-checkbox>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tabs Section -->
+      <div class="tabs-section" *ngIf="!loading()">
+        <mat-tab-group class="job-tabs" [disableRipple]="true">
+          <!-- Job Data Tab -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>data_object</mat-icon>
+              {{ 'JOBS.FIELDS.JOB-MAP-DATA' | translate }}
+            </ng-template>
+            
+            <div class="tab-content">
+              <div class="tab-header">
+                <h3 class="tab-title">{{ 'JOB-DATA.TITLE' | translate }}</h3>
+                <button 
+                  mat-raised-button 
+                  color="primary" 
+                  (click)="addJobData()">
+                  <mat-icon>add</mat-icon>
+                  <span>&nbsp;{{ 'JOB-DATA.ADD-NEW' | translate }}</span>
+                </button>
+              </div>
+              
+              <div class="table-container" *ngIf="hasJobData()">
+                <table mat-table [dataSource]="dataSourceJobData()" class="job-data-table">
+                  <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>vpn_key</mat-icon>
+                      {{ 'JOB-DATA.KEY' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ 'JOB-DATA.KEY' | translate }}</span>
+                      <div class="cell-content">
+                        <mat-form-field appearance="outline" class="table-input">
+                          <input
+                            matInput
+                            [(ngModel)]="element.dataKey"
+                            [ngModelOptions]="{ standalone: true }"
+                            [placeholder]="'JOB-DATA.KEY-PLACEHOLDER' | translate" />
+                        </mat-form-field>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>text_fields</mat-icon>
+                      {{ 'JOB-DATA.VALUE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ 'JOB-DATA.VALUE' | translate }}</span>
+                      <div class="cell-content">
+                        <mat-form-field appearance="outline" class="table-input">
+                          <input
+                            matInput
+                            [(ngModel)]="element.dataValue"
+                            [ngModelOptions]="{ standalone: true }"
+                            [placeholder]="'JOB-DATA.VALUE-PLACEHOLDER' | translate" />
+                        </mat-form-field>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>settings</mat-icon>
+                      {{ 'SCHEDULER-GENERAL.ACTIONS.ACTIONS' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                      <span class="mobile-label">{{ 'SCHEDULER-GENERAL.ACTIONS.ACTIONS' | translate }}</span>
+                      <div class="cell-content">
+                        <button 
+                          mat-icon-button 
+                          (click)="removeJobData(i)"
+                          color="warn"
+                          [matTooltip]="'JOB-DATA.REMOVE' | translate">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns" class="job-data-row"></tr>
+                </table>
+              </div>
+
+              <!-- Empty State for Job Data -->
+              <div class="empty-state" *ngIf="!hasJobData()">
+                <mat-icon class="empty-icon">data_object</mat-icon>
+                <h3>{{ 'JOB-DATA.EMPTY-TITLE' | translate }}</h3>
+                <p>{{ 'JOB-DATA.EMPTY-MESSAGE' | translate }}</p>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- Triggers Tab -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>schedule</mat-icon>
+              {{ 'TRIGGERS.TITLE' | translate }}
+            </ng-template>
+            
+            <div class="tab-content">
+              <div class="tab-header">
+                <h3 class="tab-title">{{ 'TRIGGERS.ASSOCIATED-TRIGGERS' | translate }}</h3>
+              </div>
+              
+              <div class="table-container" *ngIf="hasTriggers()">
+                <table mat-table [dataSource]="dataSourceTriggers()" class="triggers-table">
+                  <ng-container matColumnDef="triggerName">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>label</mat-icon>
+                      {{ 'TRIGGERS.FIELDS.NAME' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ 'TRIGGERS.FIELDS.NAME' | translate }}</span>
+                      <div class="cell-content">
+                        <span class="trigger-name">{{ element.triggerName }}</span>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="triggerGroup">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>group_work</mat-icon>
+                      {{ 'TRIGGERS.FIELDS.GROUP' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ 'TRIGGERS.FIELDS.GROUP' | translate }}</span>
+                      <div class="cell-content">
+                        <mat-chip>{{ element.triggerGroup }}</mat-chip>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="type">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>category</mat-icon>
+                      {{ 'TRIGGERS.FIELDS.TYPE' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ 'TRIGGERS.FIELDS.TYPE' | translate }}</span>
+                      <div class="cell-content">
+                        <mat-chip class="type-chip">
+                          {{ element.triggerType }}
+                        </mat-chip>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="startTime">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>schedule</mat-icon>
+                      {{ 'TRIGGERS.FIELDS.START-TIME' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ 'TRIGGERS.FIELDS.START-TIME' | translate }}</span>
+                      <div class="cell-content">
+                        <span class="timestamp">{{ element.startTime | date: 'medium' }}</span>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="endTime">
+                    <th mat-header-cell *matHeaderCellDef>
+                      <mat-icon>schedule</mat-icon>
+                      {{ 'TRIGGERS.FIELDS.END-TIME' | translate }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <span class="mobile-label">{{ 'TRIGGERS.FIELDS.END-TIME' | translate }}</span>
+                      <div class="cell-content">
+                        <span class="timestamp">{{ element.endTime | date: 'medium' }}</span>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsTriggers"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsTriggers" class="trigger-row"></tr>
+                </table>
+              </div>
+
+              <!-- Empty State for Triggers -->
+              <div class="empty-state" *ngIf="!hasTriggers()">
+                <mat-icon class="empty-icon">schedule</mat-icon>
+                <h3>{{ 'TRIGGERS.EMPTY-TITLE' | translate }}</h3>
+                <p>{{ 'TRIGGERS.EMPTY-MESSAGE' | translate }}</p>
+              </div>
+            </div>
+          </mat-tab>
+
+          <!-- Execution History Tab -->
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>history</mat-icon>
+              {{ 'EXECUTION-HISTORY.TITLE' | translate }}
+            </ng-template>
+            
+            <div class="tab-content">
+              <div class="tab-header">
+                <h3 class="tab-title">{{ 'EXECUTION-HISTORY.ASSOCIATED-HISTORY' | translate }}</h3>
+              </div>
+              
+              <div class="table-container" *ngIf="hasExecutionHistory()">
+                <table mat-table [dataSource]="dataSourceExecutionHistory()" class="execution-history-table">
+                  <ng-container *ngFor="let column of executionHistorycolumns" [matColumnDef]="column.column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                      <mat-icon *ngIf="column.column === 'triggerName'">schedule</mat-icon>
+                      <mat-icon *ngIf="column.column === 'triggerGroup'">group_work</mat-icon>
+                      <mat-icon *ngIf="column.column === 'jobClass'">code</mat-icon>
+                      <mat-icon *ngIf="column.column === 'jobStatus'">flag</mat-icon>
+                      <mat-icon *ngIf="column.column === 'duration'">timer</mat-icon>
+                      <mat-icon *ngIf="column.column === 'firedTime'">schedule</mat-icon>
+                      <mat-icon *ngIf="column.column === 'finishedTime'">check_circle</mat-icon>
+                      {{ column.label }}
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                      <div class="cell-content">
+                        <span *ngIf="column.type !== ListColumnType.Date">{{ element[column.column] }}</span>
+                        <span *ngIf="column.type === ListColumnType.Date" class="timestamp">{{ element[column.column] | date: 'medium' }}</span>
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumnsExecutionHistory"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutionHistory" class="execution-row"></tr>
+                </table>
+              </div>
+
+              <!-- Empty State for Execution History -->
+              <div class="empty-state" *ngIf="!hasExecutionHistory()">
+                <mat-icon class="empty-icon">history</mat-icon>
+                <h3>{{ 'EXECUTION-HISTORY.EMPTY-TITLE' | translate }}</h3>
+                <p>{{ 'EXECUTION-HISTORY.EMPTY-MESSAGE' | translate }}</p>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

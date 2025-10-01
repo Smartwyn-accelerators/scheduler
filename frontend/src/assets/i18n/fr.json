@@ -1,0 +1,320 @@
+{
+  "GENERAL": {
+    "ACTIONS": {
+      "SAVE": "Enregistrer",
+      "CANCEL": "Annuler",
+      "OK": "OK",
+      "DELETE": "Supprimer",
+      "CONFIRM": "Confirmer",
+      "EDIT": "Modifier",
+      "UPDATE": "Mettre à jour",
+      "SELECT": "Sélectionner",
+      "PAUSE": "Pause",
+      "BACK": "Retour",
+      "ACTIONS": "Actions",
+      "DE-LINK": "Délier",
+      "ADD": "Ajouter",
+      "OPEN-DETAILS": "Ouvrir les détails"
+    },
+    "ERRORS": {
+      "REQUIRED": "Le champ est obligatoire.",
+      "LENGTH-EXCEEDING": "La longueur ne peut pas être supérieure à {{length}}.",
+      "LENGTH-SHORT": "La longueur ne peut pas être inférieure à {{length}}.",
+      "INVALID-FORMAT": "Format invalide.",
+      "PASSWORD-MISMATCH": "Les mots de passe ne correspondent pas.",
+      "FETCHING-RESULT": "Une erreur s'est produite lors de la récupération des résultats",
+      "FETCHING-DETAILS": "Une erreur s'est produite lors de la récupération des détails",
+      "UPDATE": "Une erreur s'est produite lors de la mise à jour"
+    }
+  },
+  "HOME": "Accueil",
+  "LOGIN": {
+    "LOGIN": "Connexion",
+    "ERRORS": {
+      "INVALID-CREDENTIALS": "Nom d'utilisateur ou mot de passe incorrect.",
+      "INACTIVE-USER": ["L'e-mail n'est pas confirmé. Vérifiez votre e-mail pour vérifier votre e-mail ou cliquez", "ici" , "pour renvoyer le lien de confirmation."]
+    },
+    "FIELDS": {
+      "USERNAME": "Nom d'utilisateur",
+      "PASSWORD": "Mot de passe"
+    },
+    "MESSAGES": {
+      "FORGOT-PASSWORD": "mot de passe oublié?",
+      "REGISTER": "Vous n'avez pas de compte? Inscrivez-vous <a href=\"javascript:;\"> ici.</a>",
+      "OIDC-TITLE": "Connectez-vous via votre fournisseur OpenID Connect."
+    }
+  },
+  "ACCOUNT": {
+    "CONFIRM-EMAIL": {
+      "CONFIRMED-HEADING": "Adresse e-mail confirmée",
+      "CONFIRMED-MESSAGE": "Vous avez confirmé avec succès votre e-mail. Vous pouvez maintenant vous connecter à votre compte.",
+      "NOT-CONFIRMED-HEADING": "Adresse e-mail non confirmée",
+      "NOT-CONFIRMED-MESSAGE": "Nous ne pouvons pas confirmer votre e-mail. Réessayez ou contactez support@fastcode."
+    },
+    "REGISTER": {
+      "TITLE": "S'inscrire",
+      "COMPLETE-TITLE": "Merci de vous être inscrit",
+      "CHECK-EMAIL-MESSAGE": "Veuillez vérifier votre e-mail et confirmer votre adresse e-mail.",
+      "CONTACT-MESSAGE": "Pour toute question, vous pouvez nous contacter à support@fastcode.com",
+      "LOGIN-MESSAGE": "Vous avez déjà un compte? Connectez-vous <a href=\"javascript:;\"> ici.</a>"
+    },
+    "FORGOT-PASSWORD": {
+      "TITLE": "Mot de passe oublié",
+      "HEADING": "Entrez l'adresse e-mail vérifiée de votre compte utilisateur et nous vous enverrons un lien de réinitialisation du mot de passe.",
+      "SEND-EMAIL-BTN": "Envoyer l'e-mail de réinitialisation du mot de passe",
+      "EMAIL-SENT-MESSAGE": "Vérifiez votre e-mail pour un lien de réinitialisation du mot de passe. S'il n'apparaît pas dans quelques minutes, vérifiez votre dossier spam.",
+      "GO-TO-LOGIN": "Aller à la connexion"
+    },
+    "RESET-PASSWORD": {
+      "TITLE": "Réinitialiser le mot de passe",
+      "RESET-MESSAGE": "Votre mot de passe est réinitialisé.",
+      "FIELDS": {
+        "NEW-PASSWORD": "Nouveau mot de passe",
+        "CONFIRM-PASSWORD": "Confirmer le mot de passe"
+      }
+    },
+    "UPDATE-PASSWORD": {
+      "TITLE": "Mettre à jour le mot de passe",
+      "UPDATED-MESSAGE": "Votre mot de passe est mis à jour.",
+      "FIELDS": {
+        "OLD-PASSWORD": "Ancien mot de passe",
+        "NEW-PASSWORD": "Nouveau mot de passe",
+        "CONFIRM-PASSWORD": "Confirmer le mot de passe"
+      }
+    },
+    "UPDATE-PROFILE": {
+      "TITLE": "Mettre à jour le profil",
+      "UPDATED-MESSAGE": "Votre profil est mis à jour."
+    }
+  },
+  "en": "Anglais",
+  "fr": "Français",
+  "MainNav": {
+    "Home": "Accueil",
+    "AdhocReports": "Rapports ad-hoc",
+    "Admin": "Admin",
+    "Entities": "Entités",
+    "AccessMgmt": "Gestion des utilisateurs",
+    "Users": "Utilisateurs",
+    "Language": "Langue",   
+    "Monitoring": "Surveillance",
+    "Message" : "Bienvenue chez fastcode",
+    "Tools": "Outils",
+    "Administration": "Administration",
+    "About": "À propos",
+    "API": "API",
+    "MENU": {
+      "UPDATE-PASSWORD": "Mettre à jour le mot de passe",
+      "UPDATE-PROFILE": "Mettre à jour le profil",
+      "LOGOUT": "Déconnexion"
+    },
+    "EmailTemplate": "Modèles d'e-mail",
+    "Email": {
+      "Title":"Générateur de modèles d'e-mail",
+      "EmailTemplate":"Modèles d'e-mail",
+      "EmailVariables":"Champs de fusion d'e-mail",
+      "DataSource":"Source de données"
+    },
+    "JobScheduling": {
+      "Title":"Planificateur de tâches",
+      "Jobs":"Tâches",
+      "ExecutingJobs":"Tâches en cours d'exécution",
+      "Triggers":"Déclencheurs",
+      "ExecutionHistory":"Historique d'exécution"
+    }
+  },
+  "CONFIRM-DIALOG": {
+    "TITLE":"Confirmer",
+    "MESSAGE": "Êtes-vous sûr de vouloir continuer?",
+    "DELETE": {
+      "MESSAGE": "Êtes-vous sûr de vouloir supprimer cette entrée?",
+      "TITLE": "Supprimer"
+    }
+  },
+  "LIST-FILTERS":{
+    "ADD-FILTER-FIELD":{
+      "OPERATORS":{
+        "TITLE":"Opérateur"
+      },
+      "PLACEHOLDERS": {
+        "VALUE":"Valeur",
+        "FROM-VALUE":"De la valeur",
+        "TO-VALUE":"À la valeur"
+      }
+    },
+    "FIELD-CRITERIA-DISPLAY":{
+      "CONTAINS":"contient",
+      "EQUALS":"est égal à",
+      "NOT-EQUAL":"n'est pas égal à",
+      "FROM":"de",
+      "TO":"à"
+    },
+    "SEARCH-BUTTON-TEXT":"Filtrer",
+    "ADD-FILTER-PLACEHOLDER":"Ajouter un filtre"
+  },
+  "PICKER":{
+    "TITLE":"Sélectionner un {{title}}"
+  },
+  "SCHEDULER-GENERAL": {
+    "ACTIONS": {
+      "SAVE": "Enregistrer",
+      "EDIT": "Modifier",
+      "CANCEL": "Annuler",
+      "OK": "OK",
+      "DELETE": "Supprimer",
+      "CONFIRM": "Confirmer",
+      "SELECT": "Sélectionner",
+      "PAUSE": "Pause",
+      "RESUME": "Reprendre",
+      "OPEN-DETAILS": "Ouvrir les détails",
+      "BACK": "Retour",
+      "ACTIONS": "Actions"
+    },
+    "ERRORS": {
+      "REQUIRED": "Le champ est obligatoire.",
+      "LENGTH-EXCEEDING": "La longueur ne peut pas être supérieure à {{length}}.",
+      "LENGTH-SHORT": "La longueur ne peut pas être inférieure à {{length}}.",
+      "INVALID-FORMAT": "Format invalide."
+    }
+  },
+  "JOBS": {
+    "TITLE": "Tâches",
+    "ACTIONS": {
+      "ADD-JOB-DATA": "Ajouter des données de tâche",
+      "REMOVE-JOB-DATA": "Supprimer les données de tâche"
+    },
+    "CREATE": {
+      "TITLE": "Créer une tâche"
+    },
+    "MESSAGES": {
+      "CONFIRM": {
+        "TRIGGER": "Êtes-vous sûr de vouloir déclencher cette tâche maintenant?",
+        "PAUSE": "Êtes-vous sûr de vouloir mettre en pause cette tâche?",
+        "RESUME": "Êtes-vous sûr de vouloir reprendre cette tâche?",
+        "DELETE": "Êtes-vous sûr de vouloir supprimer cette tâche?"
+      },
+      "CREATED": "Tâche créée!",
+      "DELETED": "Tâche supprimée!",
+      "UPDATED": "Tâche mise à jour!",
+      "PAUSED": "Tâche mise en pause!",
+      "RESUMED": "Tâche reprise!"
+    },
+    "FIELDS": {
+      "NAME": "Nom",
+      "NAME-PLACEHOLDER": "Entrez le nom de la tâche",
+      "GROUP": "Groupe",
+      "GROUP-PLACEHOLDER": "Entrez ou sélectionnez un groupe de tâches",
+      "CLASS": "Classe",
+      "CLASS-PLACEHOLDER": "Sélectionner la classe de tâche",
+      "DESCRIPTION": "Description",
+      "DESCRIPTION-PLACEHOLDER": "Entrez la description de la tâche",
+      "JOB-MAP-DATA": "Données de tâche",
+      "LAST-EXECUTION-TIME": "Dernière heure d'exécution",
+      "NEXT-EXECUTION-TIME": "Prochaine heure d'exécution",
+      "IS-DURABLE": "Durable",
+      "NAME-HELP": "Nom de la tâche",
+      "GROUP-HELP": "Sélectionner un groupe de tâches existant ou créer un nouveau groupe de tâches",
+      "CLASS-HELP": "Classe Java qui correspond à la tâche",
+      "DESCRIPTION-HELP": "Description de la tâche",
+      "JOB-MAP-DATA-HELP": "Données transmises à la tâche",
+      "IS-DURABLE-HELP": "Une tâche durable existe même en l'absence de déclencheurs. Une tâche non durable est supprimée une fois que ses déclencheurs ont été exécutés",
+      "LAST-EXECUTION-TIME-HELP": "L'heure à laquelle la tâche a été exécutée pour la dernière fois",
+      "NEXT-EXECUTION-TIME-HELP": "L'heure à laquelle la tâche sera exécutée ensuite"
+    }
+  },
+  "JOB-DATA": {
+    "KEY": "Clé",
+    "VALUE": "Valeur",
+    "NEW-VALUE": "Nouvelle valeur",
+    "KEY-PLACEHOLDER": "Entrez le nom de la clé",
+    "VALUE-PLACEHOLDER": "Entrez la valeur",
+    "TITLE": "Données de tâche",
+    "ADD-NEW": "Ajouter de nouvelles données de tâche"
+  },
+  "TRIGGERS": {
+    "TITLE": "Déclencheurs",
+    "SELECT-JOB": "Sélectionner la tâche",
+    "ASSOCIATED-TRIGGERS": "Déclencheurs associés",
+    "EMPTY-TITLE": "Aucun déclencheur",
+    "EMPTY-MESSAGE": "Aucun déclencheur trouvé. Les déclencheurs apparaîtront ici une fois qu'ils seront créés.",
+    "MESSAGES": {
+      "TRIGGER-NEW-TITLE": "Nouveau déclencheur",
+      "CONFIRM": {
+        "PAUSE": "Êtes-vous sûr de vouloir mettre en pause ce déclencheur?",
+        "RESUME": "Êtes-vous sûr de vouloir reprendre ce déclencheur?",
+        "DELETE": "Êtes-vous sûr de vouloir supprimer ce déclencheur?"
+      },
+      "CREATED": "Déclencheur créé!",
+      "DELETED": "Déclencheur supprimé!",
+      "UPDATED": "Déclencheur mis à jour!",
+      "PAUSED": "Déclencheur mis en pause!",
+      "RESUMED": "Déclencheur repris!"
+    },
+    "FIELDS": {
+      "NAME": "Nom",
+      "GROUP": "Groupe",
+      "JOB-NAME": "Nom de la tâche",
+      "JOB-GROUP": "Groupe de tâches",
+      "JOB-CLASS": "Classe de tâche",
+      "JOB-CLASS-PLACEHOLDER": "Sélectionner la classe de tâche",
+      "DESCRIPTION": "Description",
+      "TYPE": "Type",
+      "STATUS": "Statut",
+      "JOB-MAP-DATA": "Données de tâche",
+      "LAST-EXECUTION-TIME": "Dernière heure d'exécution",
+      "NEXT-EXECUTION-TIME": "Prochaine heure d'exécution",
+      "START-TIME": "Heure de début",
+      "START-DATE": "Date de début",
+      "END-TIME": "Heure de fin",
+      "END-DATE": "Date de fin",
+      "CRON-EXPRESSION": "Expression Cron",
+      "REPEAT-INTERVAL": "Intervalle de répétition",
+      "REPEAT-INDEFINITELY": "Répéter indéfiniment",
+      "REPEAT-COUNT": "Nombre de répétitions",
+      "NAME-HELP": "Nom du déclencheur",
+      "GROUP-HELP": "Sélectionner un groupe de déclencheurs existant ou créer un nouveau groupe de déclencheurs",
+      "DESCRIPTION-HELP": "Description du déclencheur",
+      "SIMPLE-TYPE-HELP": "Exécuter exactement une fois à un moment spécifique, suivi éventuellement d'une exécution répétée à un intervalle spécifique. Exemple: Déclencher une tâche à exactement 11:23:54 AM le 13 décembre 2020 puis la déclencher cinq fois de plus, toutes les dix secondes",
+      "CRON-TYPE-HELP": "Exécuter une tâche selon un calendrier récurrent basé sur un calendrier. Exemple: Une tâche qui s'exécute tous les dimanches à 1h du matin",
+      "STATUS-HELP": "Statut",
+      "JOB-MAP-DATA-HELP": "Données transmises à la tâche",
+      "START-TIME-HELP": "Heure à laquelle la tâche sera déclenchée",
+      "START-DATE-HELP": "Date à laquelle la tâche sera déclenchée",
+      "END-TIME-HELP": "Heure à laquelle le déclencheur doit cesser de se répéter - indépendamment de toute répétition restante (basée sur les paramètres de répétition particuliers du déclencheur)",
+      "END-DATE-HELP": "Date à laquelle le déclencheur doit cesser de se répéter - indépendamment de toute répétition restante (basée sur les paramètres de répétition particuliers du déclencheur)",
+      "CRON-EXPRESSION-HELP": "Lire la documentation",
+      "REPEAT-INTERVAL-HELP": "À quelle fréquence la tâche simple doit être déclenchée",
+      "REPEAT-INDEFINITELY-HELP": "Si la tâche simple doit être déclenchée indéfiniment pour chaque intervalle de répétition",
+      "REPEAT-COUNT-HELP": "Le nombre de fois que la tâche doit être déclenchée",
+      "LAST-EXECUTION-TIME-HELP": "L'heure à laquelle la tâche a été exécutée pour la dernière fois",
+      "NEXT-EXECUTION-TIME-HELP": "L'heure à laquelle la tâche sera exécutée ensuite"
+    }
+  },
+  "EXECUTING-JOBS": {
+    "TITLE": "Tâches en cours d'exécution",
+    "FIELDS": {
+      "TRIGGER-NAME": "Nom du déclencheur",
+      "TRIGGER-GROUP": "Groupe de déclencheurs",
+      "JOB-NAME": "Nom de la tâche",
+      "JOB-GROUP": "Groupe de tâches",
+      "JOB-CLASS": "Classe de tâche",
+      "STATUS": "Statut",
+      "FIRE-TIME": "Heure de déclenchement",
+      "NEXT-FIRE-TIME": "Prochaine heure d'exécution"
+    }
+  },
+  "EXECUTION-HISTORY": {
+    "TITLE": "Historique d'exécution",
+    "FIELDS": {
+      "TRIGGER-NAME": "Nom du déclencheur",
+      "TRIGGER-GROUP": "Groupe de déclencheurs",
+      "JOB-NAME": "Nom de la tâche",
+      "JOB-GROUP": "Groupe de tâches",
+      "JOB-CLASS": "Classe de tâche",
+      "STATUS": "Statut",
+      "DURATION": "Durée",
+      "FIRE-TIME": "Dernière heure d'exécution",
+      "FINISHED-TIME": "Heure de fin"
+    }
+  }
+}

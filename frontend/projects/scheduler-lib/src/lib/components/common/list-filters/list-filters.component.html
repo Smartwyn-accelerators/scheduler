@@ -1,0 +1,143 @@
+<div *ngIf="!noFilterableFields">
+  <form [formGroup]="basicFilterForm" class="sl-filter-form" [hidden]="showFilters">
+    <div class="sl-fc-row sl-full-width">
+      <div class="sl-fc-col-md-12 sl-fc-col-lg-12 sl-center-aligned">
+        <mat-form-field class="sl-example-full-width sl-full-width" appearance="fill">
+          <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-PLACEHOLDER', 'Add filter...') }}</mat-label>
+          <input
+            type="text"
+            aria-label="Filter field"
+            matInput
+            [formControl]="filterCtrl"
+            [matAutocomplete]="auto"
+          />
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let field of filterFields" [value]="field?.searchColumn">
+              {{ field?.label }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+        <ng-container *ngIf="mySelector" class="sl-div-input-container">
+          <mat-form-field class="sl-full-width" appearance="fill">
+            <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.OPERATORS.TITLE', 'Operator') }}</mat-label>
+            <mat-select formControlName="operator">
+              <mat-option *ngFor="let operator of operators" [value]="operator">
+                {{ operator }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <ng-container *ngIf="field?.type == ListColumnType.String">
+            <mat-form-field *ngIf="basicFilterForm.get('operator')?.value" class="sl-full-width" appearance="fill">
+              <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.PLACEHOLDERS.VALUE', 'Value') }}</mat-label>
+              <input
+                formControlName="searchValue"
+                matInput
+              />
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="field?.type == ListColumnType.Boolean">
+            <mat-form-field *ngIf="basicFilterForm.get('operator')?.value" class="sl-full-width" appearance="fill">
+              <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.PLACEHOLDERS.VALUE', 'Value') }}</mat-label>
+              <mat-select formControlName="searchValue">
+                <mat-option *ngFor="let option of booleanOptions" [value]="option">
+                  {{ option }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="field?.type == ListColumnType.Number">
+            <mat-form-field
+              *ngIf="['equals', 'notEqual'].indexOf(basicFilterForm.get('operator')?.value) > -1"
+              class="sl-full-width"
+              appearance="fill"
+            >
+              <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.PLACEHOLDERS.VALUE', 'Value') }}</mat-label>
+              <input
+                type="number"
+                formControlName="searchValue"
+                matInput
+              />
+            </mat-form-field>
+
+            <mat-form-field *ngIf="basicFilterForm.get('operator')?.value == 'range'" class="sl-full-width" appearance="fill">
+              <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.PLACEHOLDERS.FROM-VALUE', 'From') }}</mat-label>
+              <input
+                type="number"
+                formControlName="startingValue"
+                matInput
+              />
+            </mat-form-field>
+
+            <mat-form-field *ngIf="basicFilterForm.get('operator')?.value == 'range'" class="sl-full-width" appearance="fill">
+              <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.PLACEHOLDERS.TO-VALUE', 'To') }}</mat-label>
+              <input
+                type="number"
+                formControlName="endingValue"
+                matInput
+              />
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="field?.type == ListColumnType.Date">
+            <mat-form-field
+              *ngIf="['equals', 'notEqual'].indexOf(basicFilterForm.get('operator')?.value) > -1"
+              class="sl-full-width"
+              appearance="fill"
+            >
+              <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.PLACEHOLDERS.VALUE', 'Value') }}</mat-label>
+              <input
+                formControlName="searchValue"
+                matInput
+                [matDatepicker]="datePicker"
+              />
+              <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+              <mat-datepicker #datePicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="basicFilterForm.get('operator')?.value == 'range'" class="sl-full-width" appearance="fill">
+              <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.PLACEHOLDERS.FROM-VALUE', 'From') }}</mat-label>
+              <input
+                formControlName="startingValue"
+                matInput
+                [matDatepicker]="startDatePicker"
+              />
+              <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #startDatePicker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="basicFilterForm.get('operator')?.value == 'range'" class="sl-full-width" appearance="fill">
+              <mat-label>{{ translate.instant('LIST-FILTERS.ADD-FILTER-FIELD.PLACEHOLDERS.TO-VALUE', 'To') }}</mat-label>
+              <input
+                formControlName="endingValue"
+                matInput
+                [matDatepicker]="endDatePicker"
+              />
+              <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #endDatePicker></mat-datepicker>
+            </mat-form-field>
+          </ng-container>
+        </ng-container>
+        <div class="sl-button-div">
+          <button name="search" mat-raised-button (click)="search()" color="primary" type="button">
+            {{ translate.instant('LIST-FILTERS.SEARCH-BUTTON-TEXT', 'Search') }}
+          </button>
+        </div>
+      </div>
+
+      <div class="sl-fc-col-sm-12">
+        <mat-chip-set>
+          <mat-chip *ngFor="let field of selectedDisplayFilterFields; let i = index" (removed)="remove(field?.searchColumn ?? '', i)" removable>
+            {{ field }}
+            <button matChipRemove [attr.aria-label]="'Remove ' + field">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip>
+        </mat-chip-set>
+      </div>
+    </div>
+  </form>
+</div>

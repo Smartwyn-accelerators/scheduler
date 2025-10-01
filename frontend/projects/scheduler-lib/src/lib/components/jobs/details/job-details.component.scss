@@ -1,0 +1,271 @@
+// Import the scheduler theme
+@import '../../../themes/scheduler-theme.scss';
+
+// Apply scheduler theme to this component
+:host {
+  @include sl-scheduler-theme-host;
+}
+
+.sl-job-details-container {
+  @include sl-scheduler-container;
+}
+
+.sl-page-header {
+  @include sl-scheduler-page-header;
+  
+  .sl-page-title {
+    @include sl-scheduler-page-title;
+  }
+  
+  .sl-page-subtitle {
+    @include sl-scheduler-page-subtitle;
+  }
+}
+
+.sl-job-details-card {
+  @include sl-scheduler-card;
+}
+
+.sl-card-header-actions {
+  align-items: flex-end;
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 12px;
+
+  button {
+    border-radius: 20px;
+    text-transform: none;
+    font-weight: var(--sl-scheduler-font-weight-medium);
+
+    mat-icon {
+      margin-right: 8px;
+    }
+  }
+}
+
+.sl-form-section {
+  padding: 24px 0;
+  
+  .sl-form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 16px;
+  }
+  
+  .sl-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .sl-form-field,
+  .sl-form-field-half,
+  .sl-form-field-full {
+    width: 100%;
+  }
+  
+  .sl-checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 0;
+    
+    .sl-durable-checkbox {
+      font-size: 16px;
+    }
+  }
+}
+
+.sl-tabs-section {
+  padding: 0;
+  
+  .sl-job-tabs {
+    .mat-mdc-tab-group {
+      background: var(--sl-scheduler-surface);
+    }
+    
+    .mat-mdc-tab-header {
+      background-color: var(--sl-scheduler-surface-container);
+      border-bottom: 1px solid var(--sl-scheduler-outline-variant);
+    }
+    
+    .mat-mdc-tab {
+      .mat-mdc-tab-label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 16px 24px;
+        font-weight: var(--sl-scheduler-font-weight-medium);
+        color: var(--sl-scheduler-on-surface-variant);
+        
+        mat-icon {
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
+        }
+      }
+      
+      &.mat-mdc-tab-active {
+        .mat-mdc-tab-label {
+          color: var(--sl-scheduler-primary);
+          font-weight: var(--sl-scheduler-font-weight-semibold);
+        }
+      }
+    }
+  }
+  
+  .sl-tab-content {
+    padding: 24px;
+    background: var(--sl-scheduler-surface);
+    border-radius: var(--sl-scheduler-border-radius-small);
+    box-shadow: var(--sl-scheduler-elevation-level1);
+    border: 1px solid var(--sl-scheduler-outline-variant);
+    margin: 16px 0;
+  }
+  
+  .sl-tab-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding: 0 0 20px 0;
+    border-bottom: 2px solid var(--sl-scheduler-outline-variant);
+    
+    .sl-tab-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0;
+      font-size: var(--sl-scheduler-font-size-card-title);
+      font-weight: var(--sl-scheduler-font-weight-semibold);
+      color: var(--sl-scheduler-on-surface);
+      
+      mat-icon {
+        font-size: 28px;
+        width: 28px;
+        height: 28px;
+        color: var(--sl-scheduler-primary);
+      }
+    }
+  }
+}
+
+.sl-table-container {
+  @include sl-scheduler-table-container;
+}
+
+.sl-job-data-table,
+.sl-triggers-table,
+.sl-execution-history-table {
+  @include sl-scheduler-table;
+  @include sl-scheduler-mobile-responsive;
+}
+
+.sl-empty-state {
+  @include sl-scheduler-empty-state;
+}
+
+.sl-cell-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sl-table-input {
+  width: 100%;
+  margin-bottom: 16px;
+  
+  .mat-mdc-form-field {
+    width: 100%;
+  }
+}
+
+.sl-type-chip {
+  background-color: var(--sl-scheduler-primary-container);
+  color: var(--sl-scheduler-on-primary-container);
+  font-weight: var(--sl-scheduler-font-weight-medium);
+}
+
+.sl-timestamp {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 13px;
+  color: var(--sl-scheduler-on-surface-variant);
+}
+
+.sl-trigger-name {
+  font-weight: var(--sl-scheduler-font-weight-medium);
+  color: var(--sl-scheduler-on-surface);
+}
+
+.sl-job-data-row,
+.sl-trigger-row,
+.sl-execution-row {
+  transition: background-color var(--sl-scheduler-transition-fast);
+  background: var(--sl-scheduler-surface);
+
+  &:hover {
+    background: var(--sl-scheduler-surface-container-low);
+  }
+
+  &.selected {
+    background: var(--sl-scheduler-primary-container);
+  }
+}
+
+// Mobile Responsive Design
+@media (max-width: 768px) {
+  .sl-job-details-container {
+    padding: var(--sl-scheduler-container-padding-mobile);
+  }
+
+  .sl-page-header {
+    margin-bottom: 24px;
+
+    .sl-page-title {
+      font-size: var(--sl-scheduler-font-size-title-mobile);
+    }
+  }
+
+  .sl-job-details-card {
+    mat-card-header {
+      padding: var(--sl-scheduler-card-padding-mobile);
+
+      .sl-card-header-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+
+        button {
+          width: 100%;
+          margin: 0;
+        }
+      }
+    }
+
+    mat-card-content {
+      padding: 0 var(--sl-scheduler-card-padding-mobile) var(--sl-scheduler-card-padding-mobile) var(--sl-scheduler-card-padding-mobile);
+    }
+  }
+
+  .sl-form-grid {
+    gap: 16px;
+  }
+  
+  .sl-form-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .sl-tab-header {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .sl-table-container {
+    overflow-x: scroll;
+  }
+}

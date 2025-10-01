@@ -1,0 +1,143 @@
+<div class="executing-jobs-container">
+  <!-- Header Section -->
+  <div class="page-header">
+    <h1 class="page-title"> <mat-icon>play_circle</mat-icon> {{ 'EXECUTING-JOBS.TITLE' | translate }}</h1>
+    <p class="page-subtitle">{{ 'EXECUTING-JOBS.SUBTITLE' | translate }}</p>
+  </div>
+
+  <!-- Main Content Card -->
+  <mat-card class="executing-jobs-card">
+    <mat-card-header>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Data Table Section -->
+      <div class="table-section">
+        <!-- Loading Spinner -->
+        <div class="empty-state" *ngIf="isLoadingResults()">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p class="loading-text">{{ 'EXECUTING-JOBS.LOADING' | translate }}</p>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-container" *ngIf="!isLoadingResults() && executingJobs().length > 0">
+          <table mat-table matSort [dataSource]="dataSource()" class="executing-table">
+            <!-- Trigger Name Column -->
+            <ng-container matColumnDef="triggerName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ 'EXECUTING-JOBS.FIELDS.TRIGGER-NAME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ 'EXECUTING-JOBS.FIELDS.TRIGGER-NAME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="trigger-name">{{ element.triggerName }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Trigger Group Column -->
+            <ng-container matColumnDef="triggerGroup">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>group_work</mat-icon>
+                {{ 'EXECUTING-JOBS.FIELDS.TRIGGER-GROUP' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ 'EXECUTING-JOBS.FIELDS.TRIGGER-GROUP' | translate }}</span>
+                <div class="cell-content">
+                  <mat-chip>{{ element.triggerGroup }}</mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Name Column -->
+            <ng-container matColumnDef="jobName">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>work</mat-icon>
+                {{ 'EXECUTING-JOBS.FIELDS.JOB-NAME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ 'EXECUTING-JOBS.FIELDS.JOB-NAME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="job-name">{{ element.jobName }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Group Column -->
+            <ng-container matColumnDef="jobGroup">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>folder</mat-icon>
+                {{ 'EXECUTING-JOBS.FIELDS.JOB-GROUP' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ 'EXECUTING-JOBS.FIELDS.JOB-GROUP' | translate }}</span>
+                <div class="cell-content">
+                  <mat-chip>{{ element.jobGroup }}</mat-chip>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Job Class Column -->
+            <ng-container matColumnDef="jobClass">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-icon>code</mat-icon>
+                {{ 'EXECUTING-JOBS.FIELDS.JOB-CLASS' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ 'EXECUTING-JOBS.FIELDS.JOB-CLASS' | translate }}</span>
+                <div class="cell-content">
+                  <span class="job-class">{{ element.jobClass }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Fired Time Column -->
+            <ng-container matColumnDef="firedTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ 'EXECUTING-JOBS.FIELDS.FIRE-TIME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ 'EXECUTING-JOBS.FIELDS.FIRE-TIME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="timestamp">{{ element.firedTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Next Execution Time Column -->
+            <ng-container matColumnDef="nextExecutionTime">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                <mat-icon>schedule</mat-icon>
+                {{ 'EXECUTING-JOBS.FIELDS.NEXT-FIRE-TIME' | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <span class="mobile-label">{{ 'EXECUTING-JOBS.FIELDS.NEXT-FIRE-TIME' | translate }}</span>
+                <div class="cell-content">
+                  <span class="timestamp">{{ element.nextExecutionTime | date: 'medium' }}</span>
+                </div>
+              </td>
+            </ng-container>
+
+            <!-- Header Row -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsExecutingJobs"></tr>
+            <!-- Data Rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsExecutingJobs" 
+                class="executing-row"
+                [class.selected]="false">
+            </tr>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" *ngIf="!isLoadingResults() && executingJobs().length === 0">
+          <mat-icon class="empty-icon">play_circle</mat-icon>
+          <h3>{{ 'EXECUTING-JOBS.EMPTY-TITLE' | translate }}</h3>
+          <p>{{ 'EXECUTING-JOBS.EMPTY-MESSAGE' | translate }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+
+  </mat-card>
+</div>

@@ -1,0 +1,69 @@
+@media (min-width: 1024px) {
+  .mat-form-field {
+    width: 33%;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mat-form-field {
+    width: 50%;
+  }
+}
+
+.filter-form {
+  display: flex;
+}
+
+.full-width {
+  width: 100%;
+}
+
+[hidden] {
+  display: none;
+}
+
+.example-chip-list {
+  width: 100%;
+}
+
+.mat-mdc-chip .mat-mdc-chip-remove {
+  color: rgba(206, 71, 71, 0.87);
+  opacity: 0.7;
+  font-size: 16px;
+}
+
+.mat-mdc-chip.mat-mdc-chip-with-trailing-icon {
+  padding-top: 4px;
+  padding-bottom: 3px;
+  padding-left: 12px;
+  font-size: 14px;
+  margin-right: 4px;
+  position: relative;
+}
+
+.field-div,
+.mat-form-field {
+  width: auto;
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.button-div,
+.div-input-container {
+  display: inline-block;
+  width: auto;
+}
+
+.button-div {
+  padding: 14px 0;
+  padding-bottom: 36px;
+  padding-left: 23px;
+}
+
+.center-aligned {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}

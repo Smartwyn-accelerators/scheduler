@@ -1,0 +1,22 @@
+{
+  "name": "scheduler-lib",
+  "version": "0.0.1",
+  "description": "Angular scheduler library",
+  "keywords": ["angular", "scheduler", "library"],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^20.3.0",
+    "@angular/core": "^20.3.0",
+    "@angular/cdk": "^20.2.3",
+    "@angular/material": "^20.2.3",
+    "@angular/router": "^20.3.0",
+    "@angular/forms": "^20.3.0",
+    "@angular/platform-browser": "^20.3.0",
+    "@angular/animations": "^20.3.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false
+}

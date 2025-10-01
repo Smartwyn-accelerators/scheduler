@@ -1,0 +1,81 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+// Import Scheduler Library Theme
+@import 'scheduler-lib/src/lib/themes/scheduler-theme.scss';
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+
+// Scheduler Library Custom Theme Properties
+:root {
+  // Map Angular Material 20 theme variables to Material Design 3 variables for scheduler library
+  --mdc-theme-primary: var(--mat-sys-primary);
+  --mdc-theme-on-primary: var(--mat-sys-on-primary);
+  --mdc-theme-primary-container: var(--mat-sys-primary-container);
+  --mdc-theme-on-primary-container: var(--mat-sys-on-primary-container);
+  --mdc-theme-secondary: var(--mat-sys-secondary);
+  --mdc-theme-on-secondary: var(--mat-sys-on-secondary);
+  --mdc-theme-secondary-container: var(--mat-sys-secondary-container);
+  --mdc-theme-on-secondary-container: var(--mat-sys-on-secondary-container);
+  --mdc-theme-tertiary: var(--mat-sys-tertiary);
+  --mdc-theme-on-tertiary: var(--mat-sys-on-tertiary);
+  --mdc-theme-tertiary-container: var(--mat-sys-tertiary-container);
+  --mdc-theme-on-tertiary-container: var(--mat-sys-on-tertiary-container);
+  --mdc-theme-error: var(--mat-sys-error);
+  --mdc-theme-on-error: var(--mat-sys-on-error);
+  --mdc-theme-error-container: var(--mat-sys-error-container);
+  --mdc-theme-on-error-container: var(--mat-sys-on-error-container);
+  --mdc-theme-surface: var(--mat-sys-surface);
+  --mdc-theme-on-surface: var(--mat-sys-on-surface);
+  --mdc-theme-surface-variant: var(--mat-sys-surface-variant);
+  --mdc-theme-on-surface-variant: var(--mat-sys-on-surface-variant);
+  --mdc-theme-outline: var(--mat-sys-outline);
+  --mdc-theme-outline-variant: var(--mat-sys-outline-variant);
+  --mdc-theme-surface-container: var(--mat-sys-surface-container);
+  --mdc-theme-surface-container-low: var(--mat-sys-surface-container-low);
+  --mdc-theme-surface-container-high: var(--mat-sys-surface-container-high);
+  --mdc-theme-surface-container-highest: var(--mat-sys-surface-container-highest);
+  
+  // Scheduler-specific theme properties
+  --sl-scheduler-primary: var(--mat-sys-primary);
+  --sl-scheduler-secondary: var(--mat-sys-tertiary);
+  --sl-scheduler-surface: var(--mat-sys-surface);
+  --sl-scheduler-on-surface: var(--mat-sys-on-surface);
+  
+  // Custom spacing and sizing
+  --sl-scheduler-container-padding: 24px;
+  --sl-scheduler-card-padding: 16px;
+  --sl-scheduler-border-radius: 8px;
+  --sl-scheduler-font-size-title: 24px;
+}

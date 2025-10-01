@@ -1,0 +1,169 @@
+<div class="create-entry newjob-popup">
+  <h2 mat-dialog-title class="dialog-title">
+    {{ translationService.instant('JOBS.CREATE.TITLE') }}
+  </h2>
+  
+  <mat-dialog-content class="dialog-content">
+    <form [formGroup]="jobForm" #jobNgForm="ngForm"  class="job-form">
+      <div class="form-row">
+        <mat-form-field class="form-field-half" appearance="fill">
+          <mat-label>
+            {{ translationService.instant('JOBS.FIELDS.NAME') }}
+            <mat-icon matTooltip="{{ translationService.instant('JOBS.FIELDS.NAME-HELP') }}" class="help-icon">help_outline</mat-icon>
+          </mat-label>
+          <input 
+            formControlName="jobName" 
+            matInput 
+            [placeholder]="translationService.instant('JOBS.FIELDS.NAME-PLACEHOLDER')"
+            maxlength="100" />
+          <mat-error>{{ getErrorMessage('jobName') }}</mat-error>
+        </mat-form-field>
+        
+        <mat-form-field class="form-field-half" appearance="fill">
+          <mat-label>
+            {{ translationService.instant('JOBS.FIELDS.GROUP') }}
+            <mat-icon matTooltip="{{ translationService.instant('JOBS.FIELDS.GROUP-HELP') }}" class="help-icon">help_outline</mat-icon>
+          </mat-label>
+          <input 
+            formControlName="jobGroup" 
+            matInput 
+            [matAutocomplete]="auto"
+            [placeholder]="translationService.instant('JOBS.FIELDS.GROUP-PLACEHOLDER')"
+            maxlength="50" />
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let group of filteredOptions | async" [value]="group">
+              {{ group }}
+            </mat-option>
+          </mat-autocomplete>
+          <mat-error>{{ getErrorMessage('jobGroup') }}</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-row">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>
+            {{ translationService.instant('JOBS.FIELDS.CLASS') }}
+            <mat-icon matTooltip="{{ translationService.instant('JOBS.FIELDS.CLASS-HELP') }}" class="help-icon">help_outline</mat-icon>
+          </mat-label>
+          <mat-select formControlName="jobClass">
+            <mat-option *ngFor="let jc of jobClasses" [value]="jc">
+              {{ jc }}
+            </mat-option>
+          </mat-select>
+          <mat-error>{{ getErrorMessage('jobClass') }}</mat-error>
+        </mat-form-field>
+      </div>
+      
+      <div class="form-row">
+        <mat-form-field class="full-width" appearance="fill">
+          <mat-label>
+            {{ translationService.instant('JOBS.FIELDS.DESCRIPTION') }}
+            <mat-icon matTooltip="{{ translationService.instant('JOBS.FIELDS.DESCRIPTION-HELP') }}" class="help-icon">help_outline</mat-icon>
+          </mat-label>
+          <textarea 
+            formControlName="description" 
+            matInput 
+            [placeholder]="translationService.instant('JOBS.FIELDS.DESCRIPTION-PLACEHOLDER')"
+            maxlength="500"
+            rows="3"></textarea>
+          <mat-error>{{ getErrorMessage('description') }}</mat-error>
+        </mat-form-field>
+      </div>
+      
+      <div class="form-row align-baseline">
+        <mat-checkbox formControlName="isDurable" class="checkbox-field">
+          {{ translationService.instant('JOBS.FIELDS.IS-DURABLE') }}
+          <mat-icon matTooltip="{{ translationService.instant('JOBS.FIELDS.IS-DURABLE-HELP') }}" class="help-icon">help_outline</mat-icon>
+        </mat-checkbox>
+      </div>
+      <mat-divider class="section-divider"></mat-divider>
+      
+      <div class="job-data-section">
+        <mat-card class="job-data-card">
+          <mat-card-header class="job-data-header">
+            <mat-card-title class="job-data-title">
+              {{ translationService.instant('JOBS.FIELDS.JOB-MAP-DATA') }}
+              <mat-icon matTooltip="{{ translationService.instant('JOBS.FIELDS.JOB-MAP-DATA-HELP') }}" class="help-icon">help_outline</mat-icon>
+            </mat-card-title>
+            <button 
+              mat-fab 
+              color="primary" 
+              (click)="addJobData()"
+              class="add-button"
+              [attr.aria-label]="translationService.instant('JOBS.ACTIONS.ADD-JOB-DATA')">
+              <mat-icon>add</mat-icon>
+            </button>
+          </mat-card-header>
+          <mat-card-content class="job-data-content">
+            <table mat-table [dataSource]="dataSource" class="job-data-table">
+              <ng-container matColumnDef="key">
+                <th mat-header-cell *matHeaderCellDef>{{ translationService.instant('JOB-DATA.KEY') }}</th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-form-field appearance="outline" class="job-data-input">
+                    <input 
+                      matInput 
+                      [(ngModel)]="element.dataKey" 
+                      [ngModelOptions]="{ standalone: true }" 
+                      [placeholder]="translationService.instant('JOB-DATA.KEY-PLACEHOLDER')" />
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="value">
+                <th mat-header-cell *matHeaderCellDef>{{ translationService.instant('JOB-DATA.VALUE') }}</th>
+                <td mat-cell *matCellDef="let element">
+                  <mat-form-field appearance="outline" class="job-data-input">
+                    <input 
+                      matInput 
+                      [(ngModel)]="element.dataValue"
+                      [ngModelOptions]="{ standalone: true }" 
+                      [placeholder]="translationService.instant('JOB-DATA.VALUE-PLACEHOLDER')" />
+                  </mat-form-field>
+                </td>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef class="actions-header">
+                  {{ translationService.instant('SCHEDULER-GENERAL.ACTIONS.ACTIONS') }}
+                </th>
+                <td mat-cell *matCellDef="let element; let i = index" class="actions-cell">
+                  <button 
+                    mat-icon-button 
+                    (click)="removeJobData(i)"
+                    [attr.aria-label]="translationService.instant('JOBS.ACTIONS.REMOVE-JOB-DATA')">
+                    <mat-icon color="warn">remove_circle</mat-icon>
+                  </button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </form>
+  </mat-dialog-content>
+  
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button 
+      type="button" 
+      mat-button 
+      (click)="onCancel()"
+      [disabled]="loading">
+      {{ translationService.instant('SCHEDULER-GENERAL.ACTIONS.CANCEL') }}
+    </button>
+    <button 
+      type="submit"
+      mat-raised-button 
+      color="primary"
+      (click)="onSubmit()"
+      [disabled]="!jobForm.valid || loading">
+      <mat-spinner 
+        *ngIf="loading" 
+        diameter="20" 
+        class="button-spinner">
+      </mat-spinner>
+      <span *ngIf="!loading">{{ translationService.instant('SCHEDULER-GENERAL.ACTIONS.SAVE') }}</span>
+    </button>
+  </mat-dialog-actions>
+</div>

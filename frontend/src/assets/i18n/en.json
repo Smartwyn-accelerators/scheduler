@@ -1,0 +1,452 @@
+{
+  "GENERAL": {
+    "ACTIONS": {
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "OK": "OK",
+      "DELETE": "Delete",
+      "CONFIRM": "Confirm",
+      "EDIT": "Edit",
+      "UPDATE": "Update",
+      "SELECT": "Select",
+      "PAUSE": "Pause",
+      "BACK": "Back",
+      "ACTIONS": "Actions",
+      "DE-LINK": "De-link",
+      "ADD": "Add",
+      "OPEN-DETAILS": "Open details"
+    },
+    "ERRORS": {
+      "REQUIRED": "Field is required.",
+      "LENGTH-EXCEEDING": "Length cannot be greater than {{length}}.",
+      "LENGTH-SHORT": "Length cannot be less than {{length}}.",
+      "INVALID-FORMAT": "Invalid format.",
+      "PASSWORD-MISMATCH": "Password do not match.",
+      "FETCHING-RESULT": "An error occurred while fetching results",
+      "FETCHING-DETAILS": "An error occurred while fetching details",
+      "UPDATE": "An error occurred while updating"
+    }
+  },
+  "HOME": "Home",
+  "LOGIN": {
+    "LOGIN": "Login",
+    "ERRORS": {
+      "INVALID-CREDENTIALS": "Wrong username or password.",
+      "INACTIVE-USER": ["Email is not confirmed. Check your email to verify your email or click", "here" , "to resend confirmation link."]
+    },
+    "FIELDS": {
+      "USERNAME": "Username",
+      "PASSWORD": "Password"
+    },
+    "MESSAGES": {
+      "FORGOT-PASSWORD": "forgot password?",
+      "REGISTER": "Don't have an account? Register <a href=\"javascript:;\"> here.</a>",
+      "OIDC-TITLE": "Login via your OpenID Connect provider."
+    }
+  },
+  "ACCOUNT": {
+    "CONFIRM-EMAIL": {
+      "CONFIRMED-HEADING": "Email address confirmed",
+      "CONFIRMED-MESSAGE": "You have successfully confirmed your email. You can log in to your account now.",
+      "NOT-CONFIRMED-HEADING": "Email address not confirmed",
+      "NOT-CONFIRMED-MESSAGE": "We cannot confirm your email. Try again or contact support@fastcode."
+    },
+    "REGISTER": {
+      "TITLE": "Register",
+      "COMPLETE-TITLE": "Thank You For Registering",
+      "CHECK-EMAIL-MESSAGE": "Please check your email and confirm your email address.",
+      "CONTACT-MESSAGE": "For any query you can contact us at support@fastcode.com",
+      "LOGIN-MESSAGE": "Already have an account? Login <a href=\"javascript:;\"> here.</a>"
+    },
+    "FORGOT-PASSWORD": {
+      "TITLE": "Forgot password",
+      "HEADING": "Enter your user account's verified email address and we will send you a password reset link.",
+      "SEND-EMAIL-BTN": "Send password reset email",
+      "EMAIL-SENT-MESSAGE": "Check your email for a link to reset your password. If it doesn't appear within a few minutes, check your spam folder.",
+      "GO-TO-LOGIN": "Go to login"
+    },
+    "RESET-PASSWORD": {
+      "TITLE": "Reset Password",
+      "RESET-MESSAGE": "Your password is reset.",
+      "FIELDS": {
+        "NEW-PASSWORD": "New password",
+        "CONFIRM-PASSWORD": "Confirm password"
+      }
+    },
+    "UPDATE-PASSWORD": {
+      "TITLE": "Update Password",
+      "UPDATED-MESSAGE": "Your password is updated.",
+      "FIELDS": {
+        "OLD-PASSWORD": "Old password",
+        "NEW-PASSWORD": "New password",
+        "CONFIRM-PASSWORD": "Confirm password"
+      }
+    },
+    "UPDATE-PROFILE": {
+      "TITLE": "Update Profile",
+      "UPDATED-MESSAGE": "Your profile is updated."
+    }
+  },
+  "en": "English",
+  "fr": "French",
+  "MainNav": {
+    "Home": "Home",
+    "AdhocReports": "Ad-hoc Reports",
+    "Admin": "Admin",
+    "Entities": "Entities",
+    "AccessMgmt": "User Management",
+    "Users": "Users",
+    "Language": "Language",   
+    "Monitoring": "Monitoring",
+    "Message" : "Welcome to fastcode",
+    "Tools": "Tools",
+    "Administration": "Administration",
+    "About": "About",
+    "API": "API",
+    "MENU": {
+      "UPDATE-PASSWORD": "Update Password",
+      "UPDATE-PROFILE": "Update Profile",
+      "LOGOUT": "Logout"
+    },
+    "EmailTemplate": "Email Templates",
+    "Email": {
+      "Title":"Email Template Builder",
+      "EmailTemplate":"Email Templates",
+      "EmailVariables":"Email Merge Fields",
+      "DataSource":"Data Source"
+    },
+    "JobScheduling": {
+      "Title":"Jobs Scheduler",
+      "Jobs":"Jobs",
+      "ExecutingJobs":"Executing Jobs",
+      "Triggers":"Triggers",
+      "ExecutionHistory":"Execution History"
+    }
+  },
+  "CONFIRM-DIALOG": {
+    "TITLE":"Confirm",
+    "MESSAGE": "Are you sure you want to proceed?",
+    "DELETE": {
+      "MESSAGE": "Are you sure you want to delete this entry?",
+      "TITLE": "Delete"
+    }
+  },
+  "LIST-FILTERS":{
+    "ADD-FILTER-FIELD":{
+      "OPERATORS":{
+        "TITLE":"Operator"
+      },
+      "PLACEHOLDERS": {
+        "VALUE":"Value",
+        "FROM-VALUE":"From value",
+        "TO-VALUE":"To value"
+      }
+    },
+    "FIELD-CRITERIA-DISPLAY":{
+      "CONTAINS":"contains",
+      "EQUALS":"is equal to",
+      "NOT-EQUAL":"not equal to",
+      "FROM":"from",
+      "TO":"to"
+    },
+    "SEARCH-BUTTON-TEXT":"Filter",
+    "ADD-FILTER-PLACEHOLDER":"Add Filter"
+  },
+  "PICKER":{
+    "TITLE":"Select a {{title}}"
+  },
+  "SCHEDULER-GENERAL": {
+    "BUTTONS": {
+      "SAVE": "Save",
+      "BACK": "Back"
+    },
+    "ACTIONS": {
+      "SAVE": "Save",
+      "EDIT": "Edit",
+      "CANCEL": "Cancel",
+      "OK": "OK",
+      "DELETE": "Delete",
+      "CONFIRM": "Confirm",
+      "SELECT": "Select",
+      "PAUSE": "Pause",
+      "RESUME": "Resume",
+      "OPEN-DETAILS": "Open details",
+      "BACK": "Back",
+      "ACTIONS": "Actions"
+    },
+    "ERRORS": {
+      "REQUIRED": "Field is required.",
+      "LENGTH-EXCEEDING": "Length cannot be greater than {{length}}.",
+      "LENGTH-SHORT": "Length cannot be less than {{length}}.",
+      "INVALID-FORMAT": "Invalid format."
+    }
+  },
+  "JOBS": {
+    "TITLE": "Jobs",
+    "SUBTITLE": "View and manage jobs",
+    "LOADING": "Loading jobs...",
+    "EMPTY-TITLE": "No Jobs",
+    "EMPTY-MESSAGE": "No jobs found. Jobs will appear here once they are created.",
+    "ACTIONS": {
+      "ADD-JOB": "Add Job",
+      "ADD-JOB-DATA": "Add job data",
+      "REMOVE-JOB-DATA": "Remove job data"
+    },
+    "CREATE": {
+      "TITLE": "Create Job"
+    },
+    "DETAILS": {
+      "TITLE": "Job Details",
+      "SUBTITLE": "View and manage job details"
+    },
+    "JOB-DATA": {
+      "TITLE": "Job Data",
+      "ADD-NEW": "Add new Job-Data"
+    },
+    "MESSAGES": {
+      "CONFIRM": {
+        "TRIGGER": "Are you sure you want to trigger this job right now?",
+        "PAUSE": "Are you sure you want to pause this job?",
+        "RESUME": "Are you sure you want to resume this job?",
+        "DELETE": "Are you sure you want to delete this job?"
+      },
+      "CREATED": "Job created!",
+      "DELETED": "Job deleted!",
+      "UPDATED": "Job updated!",
+      "PAUSED": "Job paused!",
+      "RESUMED": "Job resumed!",
+      "NO-JOBS-FOUND": "No jobs found."
+    },
+    "FIELDS": {
+      "NAME": "Name",
+      "NAME-PLACEHOLDER": "Enter job name",
+      "GROUP": "Group",
+      "GROUP-PLACEHOLDER": "Enter or select job group",
+      "CLASS": "Class",
+      "CLASS-PLACEHOLDER": "Select Job Class",
+      "DESCRIPTION": "Description",
+      "DESCRIPTION-PLACEHOLDER": "Enter job description",
+      "JOB-MAP-DATA": "Job Data",
+      "LAST-EXECUTION-TIME": "Last Execution Time",
+      "NEXT-EXECUTION-TIME": "Next Execution Time",
+      "IS-DURABLE": "Durable",
+      "NAME-HELP": "Name of the job",
+      "GROUP-HELP": "Select an existing job group or create a new job group",
+      "CLASS-HELP": "Java class that corresponds to the job",
+      "DESCRIPTION-HELP": "Job description",
+      "JOB-MAP-DATA-HELP": "Data passed to the job",
+      "IS-DURABLE-HELP": "A durable job exists even in the absence of triggers. A non-durable job is deleted once it's triggers have been executed",
+      "LAST-EXECUTION-TIME-HELP": "The time when the job was last executed",
+      "NEXT-EXECUTION-TIME-HELP": "The time when the job will be executed next"
+    }
+  },
+  "JOB-DATA": {
+    "KEY": "Key",
+    "VALUE": "Value",
+    "NEW-VALUE": "New Value",
+    "KEY-PLACEHOLDER": "Enter key name",
+    "VALUE-PLACEHOLDER": "Enter value",
+    "TITLE": "Job Data",
+    "ADD-NEW": "Add new Job-Data",
+    "EMPTY-TITLE": "No Job Data",
+    "EMPTY-MESSAGE": "No job data found. Job data will appear here once they are created."
+  },
+  "TRIGGERS": {
+    "TITLE": "Triggers",
+    "SELECT-JOB": "Select Job",
+    "ASSOCIATED-TRIGGERS": "Associated Triggers",
+    "SUBTITLE": "View and manage triggers",
+    "EMPTY-TITLE": "No Triggers",
+    "LOADING": "Loading triggers...",
+    "EMPTY-MESSAGE": "No triggers found. Triggers will appear here once they are created.",
+    "ACTIONS": {
+      "ADD-TRIGGER": "Add Trigger",
+      "SELECT-JOB": "Select Job"
+    },
+    "NEW": {
+      "TITLE": "New Trigger",
+      "SUBTITLE": "Create a new trigger"
+    },
+    "MESSAGES": {
+      "TRIGGER-NEW-TITLE": "New Trigger",
+      "CONFIRM": {
+        "PAUSE": "Are you sure you want to pause this trigger?",
+        "RESUME": "Are you sure you want to resume this trigger?",
+        "DELETE": "Are you sure you want to delete this trigger?"
+      },
+      "CREATED": "Trigger created!",
+      "DELETED": "Trigger deleted!",
+      "UPDATED": "Trigger updated!",
+      "PAUSED": "Trigger paused!",
+      "RESUMED": "Trigger resumed!"
+    },
+    "DETAILS": {
+      "TITLE": "Trigger Details",
+      "SUBTITLE": "View and manage trigger details"
+    },
+    "FIELDS": {
+      "NAME": "Name",
+      "GROUP": "Group",
+      "JOB-NAME": "Job Name",
+      "JOB-GROUP": "Job Group",
+      "JOB-CLASS": "Job Class",
+      "JOB-CLASS-PLACEHOLDER": "Select Job Class",
+      "DESCRIPTION": "Description",
+      "TYPE": "Type",
+      "STATUS": "Status",
+      "JOB-MAP-DATA": "Job Data",
+      "LAST-EXECUTION-TIME": "Last Execution Time",
+      "NEXT-EXECUTION-TIME": "Next Execution Time",
+      "START-TIME": "Start Time",
+      "START-DATE": "Start Date",
+      "END-TIME": "End Time",
+      "END-DATE": "End Date",
+      "CRON-EXPRESSION": "Cron Expression",
+      "REPEAT-INTERVAL": "Repeat Interval",
+      "REPEAT-INDEFINITELY": "Repeat Indefinitely",
+      "REPEAT-COUNT": "Repeat Count",
+      "NAME-HELP": "Name of the trigger",
+      "GROUP-HELP": "Select an existing trigger group or create a new trigger group",
+      "DESCRIPTION-HELP": "Description of the trigger",
+      "SIMPLE-TYPE-HELP": "Execute exactly once at a specific time, optionally followed by repeated execution at a specific interval. Example: Fire a job at exactly 11:23:54 AM on December 13, 2020 and then fire five more times, every ten seconds",
+      "CRON-TYPE-HELP": "Execute a job on a recurring calendar based schedule. Example: A job that runs every Sunday at 1AM",
+      "JOB-NAME-HELP": "Name of the job",
+      "JOB-GROUP-HELP": "Select an existing job group",
+      "JOB-CLASS-HELP": "Java class that corresponds to the job",
+      "STATUS-HELP": "Status",
+      "JOB-MAP-DATA-HELP": "Data passed to the job",
+      "START-TIME-HELP": "Time on which the job will be triggered",
+      "START-DATE-HELP": "Date on which the job will be triggered",
+      "END-TIME-HELP": "Time at which the Trigger should quit repeating - regardless of any remaining repeats (based on the trigger's particular repeat settings)",
+      "END-DATE-HELP": "Date at which the Trigger should quit repeating - regardless of any remaining repeats (based on the trigger's particular repeat settings)",
+      "CRON-EXPRESSION-HELP": "Read documentation",
+      "REPEAT-INTERVAL-HELP": "How often the simple job should be triggered",
+      "REPEAT-INDEFINITELY-HELP": "Whether the simple job should be triggered indefinitely for each repeat interval",
+      "REPEAT-COUNT-HELP": "The number of times the job should be triggered",
+      "LAST-EXECUTION-TIME-HELP": "The time when the job was last executed",
+      "NEXT-EXECUTION-TIME-HELP": "The time when the job will be executed next"
+    }
+  },
+  "EXECUTING-JOBS": {
+    "TITLE": "Executing Jobs",
+    "SUBTITLE": "View and manage executing jobs",
+    "CARD-TITLE": "Executing Jobs",
+    "CARD-SUBTITLE": "Monitor executing jobs details and performance",
+    "LOADING": "Loading executing jobs...",
+    "EMPTY-TITLE": "No Executing Jobs",
+    "EMPTY-MESSAGE": "No executing jobs found. Jobs will appear here once they are executing.",
+    "FIELDS": {
+      "TRIGGER-NAME": "Trigger Name",
+      "TRIGGER-GROUP": "Trigger Group",
+      "JOB-NAME": "Job Name",
+      "JOB-GROUP": "Job Group",
+      "JOB-CLASS": "Job Class",
+      "STATUS": "Status",
+      "FIRE-TIME": "Fired Time",
+      "NEXT-FIRE-TIME": "Next Execution Time"
+    }
+  },
+  "EXECUTION-HISTORY": {
+    "TITLE": "Execution History",
+    "SUBTITLE": "View and manage job execution history",
+    "CARD-TITLE": "Execution History",
+    "CARD-SUBTITLE": "Monitor job execution details and performance",
+    "SEARCH": "Search",
+    "SEARCH-PLACEHOLDER": "Search execution history...",
+    "FILTER": "Filter",
+    "ASSOCIATED-HISTORY": "Associated Job Execution History",
+    "LOADING": "Loading execution history...",
+    "EMPTY-TITLE": "No Execution History",
+    "EMPTY-MESSAGE": "No execution history found. Jobs will appear here once they are executed.",
+    "REFRESH": "Refresh",
+    "EXPORT": "Export",
+    "FIELDS": {
+      "TRIGGER-NAME": "Trigger Name",
+      "TRIGGER-GROUP": "Trigger Group",
+      "JOB-NAME": "Job Name",
+      "JOB-GROUP": "Job Group",
+      "JOB-CLASS": "Job Class",
+      "STATUS": "Status",
+      "DURATION": "Duration",
+      "FIRE-TIME": "Last Execution Time",
+      "FINISHED-TIME": "Finished Time"
+    }
+  },
+  "SCHEDULER": {
+    "JOBS": {
+      "FIELDS": {
+        "NAME": "Name",
+        "GROUP": "Group",
+        "CLASS": "Class"
+      },
+      "MESSAGES": {
+        "CREATED": "Job created successfully",
+        "DELETED": "Job deleted successfully",
+        "PAUSED": "Job paused successfully",
+        "RESUMED": "Job resumed successfully",
+        "CONFIRM": {
+          "TRIGGER": "Are you sure you want to trigger this job?",
+          "PAUSE": "Are you sure you want to pause this job?",
+          "RESUME": "Are you sure you want to resume this job?",
+          "DELETE": "Are you sure you want to delete this job?"
+        }
+      }
+    },
+    "TRIGGERS": {
+      "FIELDS": {
+        "NAME": "Name",
+        "GROUP": "Group",
+        "TYPE": "Type",
+        "JOB-NAME": "Job Name",
+        "JOB-GROUP": "Job Group",
+        "START-TIME": "Start Time",
+        "END-TIME": "End Time",
+        "LAST-EXECUTION-TIME": "Last Execution",
+        "NEXT-EXECUTION-TIME": "Next Execution"
+      },
+      "MESSAGES": {
+        "CREATED": "Trigger created successfully",
+        "DELETED": "Trigger deleted successfully",
+        "PAUSED": "Trigger paused successfully",
+        "RESUMED": "Trigger resumed successfully",
+        "CONFIRM": {
+          "PAUSE": "Are you sure you want to pause this trigger?",
+          "RESUME": "Are you sure you want to resume this trigger?",
+          "DELETE": "Are you sure you want to delete this trigger?"
+        }
+      },
+      "ACTIONS": {
+        "SELECT-JOB": "Select Job"
+      },
+      "NEW": {
+        "TITLE": "New Trigger",
+        "SUBTITLE": "Create a new trigger"
+      }
+    },
+    "SCHEDULER-GENERAL": {
+      "ACTIONS": {
+        "ACTIONS": "Actions"
+      },
+      "BUTTONS": {
+        "CREATE": "Create",
+        "EDIT": "Edit",
+        "DELETE": "Delete",
+        "PAUSE": "Pause",
+        "RESUME": "Resume",
+        "TRIGGER": "Trigger",
+        "CANCEL": "Cancel",
+        "SAVE": "Save",
+        "CONFIRM": "Confirm",
+        "YES": "Yes",
+        "NO": "No"
+      }
+    },
+    "COMMON": {
+      "LOADING": "Loading...",
+      "ERROR": "Error",
+      "SUCCESS": "Success",
+      "CONFIRM": "Confirm",
+      "CANCEL": "Cancel"
+    }
+  }
+}
